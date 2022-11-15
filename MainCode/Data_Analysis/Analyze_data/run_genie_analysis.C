@@ -75,6 +75,11 @@ int main(int argc, char **argv)
   int thetaProt_ub = stod(argv[13]);
   double protMom_lb = stod(argv[14]); 
   double protMom_ub = stod(argv[15]);
+  
+  // vchand - added extra parameters which are missing, corresponds to detector acceptance and number of protons
+  int detector_acceptance = atoi(arvg[16])
+  int NumOfProton = atoi(argv[17])
+  
 
   if (choice != 2 && choice != 1 && choice != 0) {
     std::cout << "Unknown option for data type (parameter 3). It should be either 0 or 1 (or 2). The given value is " << choice << std::endl;
