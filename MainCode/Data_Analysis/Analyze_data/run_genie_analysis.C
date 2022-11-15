@@ -77,8 +77,8 @@ int main(int argc, char **argv)
   double protMom_ub = stod(argv[15]);
   
   // vchand - added extra parameters which are missing, corresponds to detector acceptance and number of protons
-  int detector_acceptance = atoi(arvg[16])
-  int NumOfProton = atoi(argv[17])
+  int detector_acceptance = atoi(argv[16]);
+  int NumOfProton = atoi(argv[17]);
   
 
   if (choice != 2 && choice != 1 && choice != 0) {
