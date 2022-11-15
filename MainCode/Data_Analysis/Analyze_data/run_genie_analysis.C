@@ -161,7 +161,7 @@ int main(int argc, char **argv)
     return 0;
   }
 
-  genie_analysis  t( target, beam_en, rotations, choice, elSectors_flag, deltaPhiEl, thetaEl_lb, thetaEl_ub, elMom_lb, protSectors_flag, deltaPhiProt, thetaProt_lb, thetaProt_ub, protMom_lb, protMom_ub);
+  genie_analysis  t( target, beam_en, rotations, choice, elSectors_flag, deltaPhiEl, thetaEl_lb, thetaEl_ub, elMom_lb, protSectors_flag, deltaPhiProt, thetaProt_lb, thetaProt_ub, protMom_lb, protMom_ub, NumOfProton, detector_acceptance);
   t.Loop();
 
   return 0;
