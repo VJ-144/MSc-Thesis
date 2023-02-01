@@ -22,12 +22,10 @@ void Fiducial::InitPiMinusFit(std::string beam_en) {
     myPiMinusFit = new TF1("myPiMinusFit", "17.+4./TMath::Power(x,1.)", 0, 5.);
   }
   if (beam_en == "2261") {
-    myPiMinusFit =
-        new TF1("myPiMinusFit", "(x<0.35)*(25.+7./TMath::Power(x,1.)) + (x>0.35)*(16.+10/TMath::Power(x,1.))", 0, 5.);
+    myPiMinusFit = new TF1("myPiMinusFit", "(x<0.35)*(25.+7./TMath::Power(x,1.)) + (x>0.35)*(16.+10/TMath::Power(x,1.))", 0, 5.);
   }
   if (beam_en == "4461") {
-    myPiMinusFit =
-        new TF1("myPiMinusFit", "(x<0.35)*(25.+7./TMath::Power(x,1.)) + (x>0.35)*(16.+10/TMath::Power(x,1.))", 0, 5.);
+    myPiMinusFit = new TF1("myPiMinusFit", "(x<0.35)*(25.+7./TMath::Power(x,1.)) + (x>0.35)*(16.+10/TMath::Power(x,1.))", 0, 5.);
   }
 }
 
@@ -91,13 +89,12 @@ void Fiducial::SetConstants(int in_TorusCurrent, std::string in_target_name, std
 
 void Fiducial::SetFiducialCutParameters(std::string beam_en) {
   // reads from a file the parameters of the fiducial cut functions
-  // Please refer to <A HREF="http://einstein.unh.edu/protopop/FiducialCuts/fc4E2.html">Fiducial Cuts</A> --
-  // D.Protopopescu(UNH)
+  // Please refer to <A HREF="http://einstein.unh.edu/protopop/FiducialCuts/fc4E2.html">Fiducial Cuts</A> -- D.Protopopescu(UNH)
   std::string fbeam_en = beam_en;
 
   if (en_beam[fbeam_en] > 4. && en_beam[fbeam_en] < 5.) { //
-    // reads FC parameters for 4.4GeV , e- and p fiducial cut parameters at 4GeV
-    //
+                                                          // reads FC parameters for 4.4GeV , e- and p fiducial cut parameters at 4GeV
+                                                          //
     std::ifstream param_file2(Form("./FiducialsCorrections/PFID_%s_%d.dat", fbeam_en.c_str(),
                                    fTorusCurrent)); // reading the proton fiducial cut parameters at 4GeV
     std::ifstream param_file(Form("./FiducialsCorrections/FCP_%s_%d.dat", fbeam_en.c_str(), fTorusCurrent));
@@ -136,8 +133,7 @@ void Fiducial::SetFiducialCutParameters(std::string beam_en) {
           fgPar_4Gev_2250_Efid_a_p[sector - 1][1][k] = data[k];
         break;
       default:
-        printf("Error in Efid parameter file!\nReceived parameter type %d, which is not found.\nAborting!\n\n\n",
-               param_type);
+        printf("Error in Efid parameter file!\nReceived parameter type %d, which is not found.\nAborting!\n\n\n", param_type);
         break;
       }
     } // Done reading in Fiducial Region Parameters
@@ -537,8 +533,7 @@ void Fiducial::SetFiducialCutParameters(std::string beam_en) {
   //	param_file2.close();
 }
 
-Bool_t Fiducial::GetEPhiLimits(std::string beam_en, Float_t momentum, Float_t theta, Int_t sector, Float_t *EPhiMin,
-                               Float_t *EPhiMax) {
+Bool_t Fiducial::GetEPhiLimits(std::string beam_en, Float_t momentum, Float_t theta, Int_t sector, Float_t *EPhiMin, Float_t *EPhiMax) {
   // Begin_Html
   /*</pre>
    Information for electron fiducial cut,
@@ -552,9 +547,9 @@ Bool_t Fiducial::GetEPhiLimits(std::string beam_en, Float_t momentum, Float_t th
                2 inconsistent events out of 10^6
       4.4 GeV: tested for 10 < theta < 65, -30 < phi < 360, 0.3 < Ef < 4.461
                0 inconsistent events out of 10^6
-   Please refer to <A HREF="http://www.jlab.org/Hall-B/secure/e2/bzh/efiducialcut.html">Electron Fiducial Cuts</A> --
-  Bin Zhang (MIT). For 4.4GeV please refer to <A
-  HREF="http://einstein.unh.edu/protopop/FiducialCuts/fc4E2.html">Fiducial Cuts</A> -- D.Protopopescu (UNH) <pre>
+   Please refer to <A HREF="http://www.jlab.org/Hall-B/secure/e2/bzh/efiducialcut.html">Electron Fiducial Cuts</A> -- Bin Zhang (MIT).
+   For 4.4GeV please refer to <A HREF="http://einstein.unh.edu/protopop/FiducialCuts/fc4E2.html">Fiducial Cuts</A> -- D.Protopopescu (UNH)
+  <pre>
   */
   // End_Html
   std::string fbeam_en = beam_en;
@@ -673,24 +668,20 @@ Bool_t Fiducial::EFiducialCut(std::string beam_en, TVector3 momentum) {
     if (phi <= 0) {
 
       uplow = 1;
-      thetacutoff =
-          ((phi * (thetapars[0] - (thetapars[1] / thetapars[2]))) + (double(uplow) * thetapars[2] * thetapars[0])) /
-          (phi + (double(uplow) * thetapars[2]));
+      thetacutoff = ((phi * (thetapars[0] - (thetapars[1] / thetapars[2]))) + (double(uplow) * thetapars[2] * thetapars[0])) /
+                    (phi + (double(uplow) * thetapars[2]));
 
     } else {
 
       uplow = -1;
-      thetacutoff =
-          ((phi * (thetapars[0] - (thetapars[3] / thetapars[4]))) + (double(uplow) * thetapars[4] * thetapars[0])) /
-          (phi + (double(uplow) * thetapars[4]));
+      thetacutoff = ((phi * (thetapars[0] - (thetapars[3] / thetapars[4]))) + (double(uplow) * thetapars[4] * thetapars[0])) /
+                    (phi + (double(uplow) * thetapars[4]));
     }
 
-    status = (theta > thetacutoff) && (thetacutoff >= thetapars[0]) && (elmom > 300) && (elmom <= 1100) &&
-             theta <= thetamax_e;
+    status = (theta > thetacutoff) && (thetacutoff >= thetapars[0]) && (elmom > 300) && (elmom <= 1100) && theta <= thetamax_e;
 
     if (SCpdcut && (fTorusCurrent > 1490) &&
-        (fTorusCurrent <
-         1510)) { // if the SCpdCut bit is set, take off the bad SC paddle by strictly cutting off a theta gap.
+        (fTorusCurrent < 1510)) { // if the SCpdCut bit is set, take off the bad SC paddle by strictly cutting off a theta gap.
 
       if (status) {
 
@@ -773,8 +764,7 @@ Bool_t Fiducial::EFiducialCut(std::string beam_en, TVector3 momentum) {
     }
 
     if (SCpdcut && (fTorusCurrent > 740) &&
-        (fTorusCurrent <
-         760)) { // if the SCpdCut bit is set, take off the bad SC paddle by strictly cutting off a theta gap.
+        (fTorusCurrent < 760)) { // if the SCpdCut bit is set, take off the bad SC paddle by strictly cutting off a theta gap.
 
       if (status) {
 
@@ -788,10 +778,10 @@ Bool_t Fiducial::EFiducialCut(std::string beam_en, TVector3 momentum) {
           double parsec2_l, parsec2_h;
           if (mom < 0.4)
             mom = 0.4;
-          parsec2_l = fid_1gev_750_efid_S2[0][0] + fid_1gev_750_efid_S2[0][1] / mom +
-                      fid_1gev_750_efid_S2[0][2] / (mom * mom) + fid_1gev_750_efid_S2[0][3] / (mom * mom * mom);
-          parsec2_h = fid_1gev_750_efid_S2[1][0] + fid_1gev_750_efid_S2[1][1] / mom +
-                      fid_1gev_750_efid_S2[1][2] / (mom * mom) + fid_1gev_750_efid_S2[1][3] / (mom * mom * mom);
+          parsec2_l = fid_1gev_750_efid_S2[0][0] + fid_1gev_750_efid_S2[0][1] / mom + fid_1gev_750_efid_S2[0][2] / (mom * mom) +
+                      fid_1gev_750_efid_S2[0][3] / (mom * mom * mom);
+          parsec2_h = fid_1gev_750_efid_S2[1][0] + fid_1gev_750_efid_S2[1][1] / mom + fid_1gev_750_efid_S2[1][2] / (mom * mom) +
+                      fid_1gev_750_efid_S2[1][3] / (mom * mom * mom);
           status = status && !(theta > parsec2_l && theta < parsec2_h);
         }
 
@@ -810,11 +800,9 @@ Bool_t Fiducial::EFiducialCut(std::string beam_en, TVector3 momentum) {
               mom = 0.4;
             }
             parsec3_l[d] = fid_1gev_750_efid_S3[d][0][0] + fid_1gev_750_efid_S3[d][0][1] / mom +
-                           fid_1gev_750_efid_S3[d][0][2] / (mom * mom) +
-                           fid_1gev_750_efid_S3[d][0][3] / (mom * mom * mom);
+                           fid_1gev_750_efid_S3[d][0][2] / (mom * mom) + fid_1gev_750_efid_S3[d][0][3] / (mom * mom * mom);
             parsec3_h[d] = fid_1gev_750_efid_S3[d][1][0] + fid_1gev_750_efid_S3[d][1][1] / mom +
-                           fid_1gev_750_efid_S3[d][1][2] / (mom * mom) +
-                           fid_1gev_750_efid_S3[d][1][3] / (mom * mom * mom);
+                           fid_1gev_750_efid_S3[d][1][2] / (mom * mom) + fid_1gev_750_efid_S3[d][1][3] / (mom * mom * mom);
             status = status && !(theta > parsec3_l[d] && theta < parsec3_h[d]);
           }
 
@@ -835,11 +823,9 @@ Bool_t Fiducial::EFiducialCut(std::string beam_en, TVector3 momentum) {
               mom = 0.3;
             }
             parsec4_l[d] = fid_1gev_750_efid_S4[d][0][0] + fid_1gev_750_efid_S4[d][0][1] / mom +
-                           fid_1gev_750_efid_S4[d][0][2] / (mom * mom) +
-                           fid_1gev_750_efid_S4[d][0][3] / (mom * mom * mom);
+                           fid_1gev_750_efid_S4[d][0][2] / (mom * mom) + fid_1gev_750_efid_S4[d][0][3] / (mom * mom * mom);
             parsec4_h[d] = fid_1gev_750_efid_S4[d][1][0] + fid_1gev_750_efid_S4[d][1][1] / mom +
-                           fid_1gev_750_efid_S4[d][1][2] / (mom * mom) +
-                           fid_1gev_750_efid_S4[d][1][3] / (mom * mom * mom);
+                           fid_1gev_750_efid_S4[d][1][2] / (mom * mom) + fid_1gev_750_efid_S4[d][1][3] / (mom * mom * mom);
             status = status && !(theta > parsec4_l[d] && theta < parsec4_h[d]);
           }
 
@@ -861,11 +847,9 @@ Bool_t Fiducial::EFiducialCut(std::string beam_en, TVector3 momentum) {
               mom = 0.5;
             }
             parsec5_l[d] = fid_1gev_750_efid_S5[d][0][0] + fid_1gev_750_efid_S5[d][0][1] / mom +
-                           fid_1gev_750_efid_S5[d][0][2] / (mom * mom) +
-                           fid_1gev_750_efid_S5[d][0][3] / (mom * mom * mom);
+                           fid_1gev_750_efid_S5[d][0][2] / (mom * mom) + fid_1gev_750_efid_S5[d][0][3] / (mom * mom * mom);
             parsec5_h[d] = fid_1gev_750_efid_S5[d][1][0] + fid_1gev_750_efid_S5[d][1][1] / mom +
-                           fid_1gev_750_efid_S5[d][1][2] / (mom * mom) +
-                           fid_1gev_750_efid_S5[d][1][3] / (mom * mom * mom);
+                           fid_1gev_750_efid_S5[d][1][2] / (mom * mom) + fid_1gev_750_efid_S5[d][1][3] / (mom * mom * mom);
             status = status && !(theta > parsec5_l[d] && theta < parsec5_h[d]);
           }
         }
@@ -1008,11 +992,10 @@ Bool_t Fiducial::EFiducialCut(std::string beam_en, TVector3 momentum) {
     //		Now calls GetEPhiLimits for 2.2 and 4.4 GeV
     //		tested against EFiducialCut for both 2.2 (with and without bad scintillator cuts) and 4.4 GeV
     //		discrepancy less than 2 in 10^6 events
-    //		Please refer to <A HREF="http://www.jlab.org/Hall-B/secure/e2/bzh/efiducialcut.html">Electron Fiducial
-    //Cuts</A> -- Bin Zhang (MIT). 		For 4.4GeV please refer to <A
-    //HREF="http://einstein.unh.edu/protopop/FiducialCuts/fc4E2.html">Fiducial Cuts</A> -- D.Protopopescu (UNH) 		Please
-    //refer to <a href="http://www.jlab.org/Hall-B/secure/e2/stevenmc/FiducialCuts/index.html">1.1 GeV fiducial cuts</a>
-    //-- Steven McLauchlan (GU). 		<pre>
+    //		Please refer to <A HREF="http://www.jlab.org/Hall-B/secure/e2/bzh/efiducialcut.html">Electron Fiducial Cuts</A> -- Bin Zhang
+    //(MIT). 		For 4.4GeV please refer to <A HREF="http://einstein.unh.edu/protopop/FiducialCuts/fc4E2.html">Fiducial Cuts</A> --
+    //D.Protopopescu (UNH) 		Please refer to <a href="http://www.jlab.org/Hall-B/secure/e2/stevenmc/FiducialCuts/index.html">1.1 GeV fiducial
+    //cuts</a> -- Steven McLauchlan (GU). 		<pre>
     //		//End_Html
 
     Float_t phiMin, phiMax;
@@ -1212,8 +1195,8 @@ Bool_t Fiducial::EFiducialCut(std::string beam_en, TVector3 momentum) {
 // ------------------------------------------------------------------------------------------------------------------------------------------
 // ------------------------------------------------------------------------------------------------------------------------------------------
 
-// apapadop // Nov 11 2020 // Narrow band 30 deg in phi and either accepting ALL theta or theta_pos > 12 deg (piplus &
-// protons) and theta_pi- > 30
+// apapadop // Nov 11 2020 // Narrow band 30 deg in phi and either accepting ALL theta or theta_pos > 12 deg (piplus & protons) and
+// theta_pi- > 30
 
 double Fiducial::GetPhi(TVector3 momentum) {
 
@@ -1248,8 +1231,7 @@ double Fiducial::GetTheta(TVector3 momentum) {
 
 Bool_t Fiducial::PFiducialCut(std::string beam_en, TVector3 momentum) {
   // Positive Hadron Fiducial Cut
-  // Please refer to <A HREF="http://www.jlab.org/Hall-B/secure/e2/bzh/pfiducialcut.html">Electron Fiducial Cuts</A> --
-  // Bin Zhang (MIT).
+  // Please refer to <A HREF="http://www.jlab.org/Hall-B/secure/e2/bzh/pfiducialcut.html">Electron Fiducial Cuts</A> -- Bin Zhang (MIT).
 
   if (beam_en == "") {
 
@@ -1258,12 +1240,9 @@ Bool_t Fiducial::PFiducialCut(std::string beam_en, TVector3 momentum) {
     double phi = GetPhi(momentum);
     double theta = GetTheta(momentum);
 
-    if (!(TMath::Abs(phi - CenterFirstSector) < PhiOpeningAngle ||
-          TMath::Abs(phi - CenterSecondSector) < PhiOpeningAngle ||
-          TMath::Abs(phi - CenterThirdSector) < PhiOpeningAngle ||
-          TMath::Abs(phi - CenterFourthSector) < PhiOpeningAngle ||
-          TMath::Abs(phi - CenterFifthSector) < PhiOpeningAngle ||
-          TMath::Abs(phi - CenterSixthSector) < PhiOpeningAngle)) {
+    if (!(TMath::Abs(phi - CenterFirstSector) < PhiOpeningAngle || TMath::Abs(phi - CenterSecondSector) < PhiOpeningAngle ||
+          TMath::Abs(phi - CenterThirdSector) < PhiOpeningAngle || TMath::Abs(phi - CenterFourthSector) < PhiOpeningAngle ||
+          TMath::Abs(phi - CenterFifthSector) < PhiOpeningAngle || TMath::Abs(phi - CenterSixthSector) < PhiOpeningAngle)) {
       status = false;
     }
 
@@ -1418,8 +1397,8 @@ Bool_t Fiducial::PFiducialCut(std::string beam_en, TVector3 momentum) {
         for (Int_t mompar = 0; mompar < 6; mompar++) {
           for (Int_t phipar = 0; phipar < 5; phipar++) {
             phipars[phipar] += fgPar_1gev_750_Pfid[sector][phipar][mompar] * pow(p, mompar);
-            // std::cout << p << " " << mompar << " " << phipar << " " << phipars[1] << " " << phipars[2] << " " <<
-            // phipars[3] << " " << phipars[4] << " " << phipars[5] << std::endl;
+            // std::cout << p << " " << mompar << " " << phipar << " " << phipars[1] << " " << phipars[2] << " " << phipars[3] << " " <<
+            // phipars[4] << " " << phipars[5] << std::endl;
           }
         }
 
@@ -1478,11 +1457,9 @@ Bool_t Fiducial::PFiducialCut(std::string beam_en, TVector3 momentum) {
           else if (tsector == 2) {
             double parsec2_l, parsec2_h;
             parsec2_l = fid_1gev_750_pfid_S2[0][0] + fid_1gev_750_pfid_S2[0][1] / mom_scpd +
-                        fid_1gev_750_pfid_S2[0][2] / (mom_scpd * mom_scpd) +
-                        fid_1gev_750_pfid_S2[0][3] / (mom_scpd * mom_scpd * mom_scpd);
+                        fid_1gev_750_pfid_S2[0][2] / (mom_scpd * mom_scpd) + fid_1gev_750_pfid_S2[0][3] / (mom_scpd * mom_scpd * mom_scpd);
             parsec2_h = fid_1gev_750_pfid_S2[1][0] + fid_1gev_750_pfid_S2[1][1] / mom_scpd +
-                        fid_1gev_750_pfid_S2[1][2] / (mom_scpd * mom_scpd) +
-                        fid_1gev_750_pfid_S2[1][3] / (mom_scpd * mom_scpd * mom_scpd);
+                        fid_1gev_750_pfid_S2[1][2] / (mom_scpd * mom_scpd) + fid_1gev_750_pfid_S2[1][3] / (mom_scpd * mom_scpd * mom_scpd);
             status = status && !(theta > parsec2_l && theta < parsec2_h);
           }
 
@@ -1515,8 +1492,7 @@ Bool_t Fiducial::PFiducialCut(std::string beam_en, TVector3 momentum) {
           }
 
           // sector 5 has four gaps
-          else if (tsector == 5) { // the fourth bad TOF pd. can be seen only below b=0.3 and so there are just three
-                                   // bad TOFs for p
+          else if (tsector == 5) { // the fourth bad TOF pd. can be seen only below b=0.3 and so there are just three bad TOFs for p
             double parsec5_l[3], parsec5_h[3];
             for (int d = 0; d < 3; d++) {
               //  if(d==0 && d==1 && mom_scpd>0.6)mom_scpd=0.6;
@@ -1741,8 +1717,7 @@ Bool_t Fiducial::PFiducialCut(std::string beam_en, TVector3 momentum) {
           parfidr[i] = fgPar_4Gev_2250_Pfidft2r[sector][j] + fgPar_4Gev_2250_Pfidft2r[sector][j + 1] / p;
         }
       }
-      phi45l = parfidl[0] * (parfidl[2] - 45) /
-               (45 - parfidl[2] + (parfidl[1] / parfidl[0])); // parametrized value of phi at theta=45 deg.
+      phi45l = parfidl[0] * (parfidl[2] - 45) / (45 - parfidl[2] + (parfidl[1] / parfidl[0])); // parametrized value of phi at theta=45 deg.
       phi45r = -parfidr[0] * (parfidr[2] - 45) / (45 - parfidr[2] + (parfidr[1] / parfidr[0]));
       if (theta > thetab) { // backward region defined by theta >45 deg.
         if (theta > 140)
@@ -1787,8 +1762,7 @@ Bool_t Fiducial::PFiducialCut(std::string beam_en, TVector3 momentum) {
           theta_min = 14;
         else
           theta_min = 11; // for p<0.6 GeV/c Region theta starts from 14 deg., otherwise 11 deg.
-        cphil =
-            parfidl[0] * (parfidl[2] - theta) / (theta - parfidl[2] + (parfidl[1] / parfidl[0])); // hyperbolic function
+        cphil = parfidl[0] * (parfidl[2] - theta) / (theta - parfidl[2] + (parfidl[1] / parfidl[0])); // hyperbolic function
         cphir = -parfidr[0] * (parfidr[2] - theta) / (theta - parfidr[2] + (parfidr[1] / parfidr[0]));
       } else {                                                       // Backward region
         phi60l = parfidl[0] + parfidl[1] * 60. + parfidl[2] * 3600.; // parametrized value of phi at theta=60 deg.
@@ -1914,8 +1888,7 @@ Bool_t Fiducial::PFiducialCut(std::string beam_en, TVector3 momentum) {
             for (int i = 0; i < 2; i++) {
               badpar2[i] = 0;
               // calculate the parameters using 1/p
-              badpar2[i] = fgPar_4Gev_2250_Pfid_ScpdS2_extra[i][0] +
-                           fgPar_4Gev_2250_Pfid_ScpdS2_extra[i][1] / mom_scpd +
+              badpar2[i] = fgPar_4Gev_2250_Pfid_ScpdS2_extra[i][0] + fgPar_4Gev_2250_Pfid_ScpdS2_extra[i][1] / mom_scpd +
                            fgPar_4Gev_2250_Pfid_ScpdS2_extra[i][2] / (mom_scpd * mom_scpd) +
                            fgPar_4Gev_2250_Pfid_ScpdS2_extra[i][3] / (mom_scpd * mom_scpd * mom_scpd);
             }
@@ -1928,8 +1901,7 @@ Bool_t Fiducial::PFiducialCut(std::string beam_en, TVector3 momentum) {
             for (int i = 0; i < 8; i++) {
               badpar3[i] = 0;
               // calculate the parameters using 1/p
-              badpar3[i] = fgPar_4Gev_2250_Pfid_ScpdS3_extra[i][0] +
-                           fgPar_4Gev_2250_Pfid_ScpdS3_extra[i][1] / mom_scpd +
+              badpar3[i] = fgPar_4Gev_2250_Pfid_ScpdS3_extra[i][0] + fgPar_4Gev_2250_Pfid_ScpdS3_extra[i][1] / mom_scpd +
                            fgPar_4Gev_2250_Pfid_ScpdS3_extra[i][2] / (mom_scpd * mom_scpd) +
                            fgPar_4Gev_2250_Pfid_ScpdS3_extra[i][3] / (mom_scpd * mom_scpd * mom_scpd);
             }
@@ -1942,8 +1914,7 @@ Bool_t Fiducial::PFiducialCut(std::string beam_en, TVector3 momentum) {
             for (int i = 0; i < 4; i++) {
               badpar4[i] = 0;
               // calculate the parameters using 1/p
-              badpar4[i] = fgPar_4Gev_2250_Pfid_ScpdS4_extra[i][0] +
-                           fgPar_4Gev_2250_Pfid_ScpdS4_extra[i][1] / mom_scpd +
+              badpar4[i] = fgPar_4Gev_2250_Pfid_ScpdS4_extra[i][0] + fgPar_4Gev_2250_Pfid_ScpdS4_extra[i][1] / mom_scpd +
                            fgPar_4Gev_2250_Pfid_ScpdS4_extra[i][2] / (mom_scpd * mom_scpd) +
                            fgPar_4Gev_2250_Pfid_ScpdS4_extra[i][3] / (mom_scpd * mom_scpd * mom_scpd);
             }
@@ -1956,8 +1927,7 @@ Bool_t Fiducial::PFiducialCut(std::string beam_en, TVector3 momentum) {
             for (Int_t i = 0; i < 8; i++) {
               badpar5[i] = 0;
               // calculate the parameters using 1/p
-              badpar5[i] = fgPar_4Gev_2250_Pfid_ScpdS5_extra[i][0] +
-                           fgPar_4Gev_2250_Pfid_ScpdS5_extra[i][1] / mom_scpd +
+              badpar5[i] = fgPar_4Gev_2250_Pfid_ScpdS5_extra[i][0] + fgPar_4Gev_2250_Pfid_ScpdS5_extra[i][1] / mom_scpd +
                            fgPar_4Gev_2250_Pfid_ScpdS5_extra[i][2] / (mom_scpd * mom_scpd) +
                            fgPar_4Gev_2250_Pfid_ScpdS5_extra[i][3] / (mom_scpd * mom_scpd * mom_scpd);
             }
@@ -1986,8 +1956,7 @@ Bool_t Fiducial::PFiducialCut(std::string beam_en, TVector3 momentum) {
 
 Bool_t Fiducial::PiplFiducialCut(std::string beam_en, TVector3 momentum, Float_t *philow, Float_t *phiup) {
   // Positive Hadron Fiducial Cut
-  // Please refer to <A HREF="http://www.jlab.org/Hall-B/secure/e2/bzh/pfiducialcut.html">Electron Fiducial Cuts</A> --
-  // Bin Zhang (MIT).
+  // Please refer to <A HREF="http://www.jlab.org/Hall-B/secure/e2/bzh/pfiducialcut.html">Electron Fiducial Cuts</A> -- Bin Zhang (MIT).
 
   if (beam_en == "") {
 
@@ -1996,12 +1965,9 @@ Bool_t Fiducial::PiplFiducialCut(std::string beam_en, TVector3 momentum, Float_t
     double phi = GetPhi(momentum);
     double theta = GetTheta(momentum);
 
-    if (!(TMath::Abs(phi - CenterFirstSector) < PhiOpeningAngle ||
-          TMath::Abs(phi - CenterSecondSector) < PhiOpeningAngle ||
-          TMath::Abs(phi - CenterThirdSector) < PhiOpeningAngle ||
-          TMath::Abs(phi - CenterFourthSector) < PhiOpeningAngle ||
-          TMath::Abs(phi - CenterFifthSector) < PhiOpeningAngle ||
-          TMath::Abs(phi - CenterSixthSector) < PhiOpeningAngle)) {
+    if (!(TMath::Abs(phi - CenterFirstSector) < PhiOpeningAngle || TMath::Abs(phi - CenterSecondSector) < PhiOpeningAngle ||
+          TMath::Abs(phi - CenterThirdSector) < PhiOpeningAngle || TMath::Abs(phi - CenterFourthSector) < PhiOpeningAngle ||
+          TMath::Abs(phi - CenterFifthSector) < PhiOpeningAngle || TMath::Abs(phi - CenterSixthSector) < PhiOpeningAngle)) {
       status = false;
     }
 
@@ -2041,8 +2007,8 @@ Bool_t Fiducial::PiplFiducialCut(std::string beam_en, TVector3 momentum, Float_t
         for (Int_t mompar = 0; mompar < 6; mompar++) {
           for (Int_t phipar = 0; phipar < 5; phipar++) {
             phipars[phipar] += fgPar_1gev_1500_Pfid[sector][phipar][mompar] * pow(p, mompar);
-            // std::cout << p << " " << mompar << " " << phipar << " " << phipars[1] << " " << phipars[2] << " " <<
-            // phipars[3] << " " << phipars[4] << " " << phipars[5] << std::endl;
+            // std::cout << p << " " << mompar << " " << phipar << " " << phipars[1] << " " << phipars[2] << " " << phipars[3] << " " <<
+            // phipars[4] << " " << phipars[5] << std::endl;
           }
         }
 
@@ -2133,8 +2099,8 @@ Bool_t Fiducial::PiplFiducialCut(std::string beam_en, TVector3 momentum, Float_t
         for (Int_t mompar = 0; mompar < 6; mompar++) {
           for (Int_t phipar = 0; phipar < 5; phipar++) {
             phipars[phipar] += fgPar_1gev_750_Pfid[sector][phipar][mompar] * pow(p, mompar);
-            // std::cout << p << " " << mompar << " " << phipar << " " << phipars[1] << " " << phipars[2] << " " <<
-            // phipars[3] << " " << phipars[4] << " " << phipars[5] << std::endl;
+            // std::cout << p << " " << mompar << " " << phipar << " " << phipars[1] << " " << phipars[2] << " " << phipars[3] << " " <<
+            // phipars[4] << " " << phipars[5] << std::endl;
           }
         }
 
@@ -2159,9 +2125,8 @@ Bool_t Fiducial::PiplFiducialCut(std::string beam_en, TVector3 momentum, Float_t
         if (status && SCpdcut) { // cut bad scintillator paddles
           Int_t tsector = sector + 1;
           Float_t mom_scpd = momentum.Mag(); // momentum for bad sc paddles cuts
-          // F.H. 10/31/19 Mariana's update mom_scpd =momentum.Mag() compared to mom_scpd= p before; but this skips if
-          // conditions above on "p" NOT USED by Mariana's update  if (mom_scpd>1.0)mom_scpd=1.0; // momentum greater
-          // than 1000 MeV/c, use 1000 MeV/c
+          // F.H. 10/31/19 Mariana's update mom_scpd =momentum.Mag() compared to mom_scpd= p before; but this skips if conditions above on
+          // "p" NOT USED by Mariana's update  if (mom_scpd>1.0)mom_scpd=1.0; // momentum greater than 1000 MeV/c, use 1000 MeV/c
           if (mom_scpd < 0.2)
             mom_scpd = 0.2; // momentum smaller than 200 MeV/c, use 200 MeV/c
 
@@ -2192,11 +2157,9 @@ Bool_t Fiducial::PiplFiducialCut(std::string beam_en, TVector3 momentum, Float_t
           else if (tsector == 2) {
             double parsec2_l, parsec2_h;
             parsec2_l = fid_1gev_750_pfid_S2[0][0] + fid_1gev_750_pfid_S2[0][1] / mom_scpd +
-                        fid_1gev_750_pfid_S2[0][2] / (mom_scpd * mom_scpd) +
-                        fid_1gev_750_pfid_S2[0][3] / (mom_scpd * mom_scpd * mom_scpd);
+                        fid_1gev_750_pfid_S2[0][2] / (mom_scpd * mom_scpd) + fid_1gev_750_pfid_S2[0][3] / (mom_scpd * mom_scpd * mom_scpd);
             parsec2_h = fid_1gev_750_pfid_S2[1][0] + fid_1gev_750_pfid_S2[1][1] / mom_scpd +
-                        fid_1gev_750_pfid_S2[1][2] / (mom_scpd * mom_scpd) +
-                        fid_1gev_750_pfid_S2[1][3] / (mom_scpd * mom_scpd * mom_scpd);
+                        fid_1gev_750_pfid_S2[1][2] / (mom_scpd * mom_scpd) + fid_1gev_750_pfid_S2[1][3] / (mom_scpd * mom_scpd * mom_scpd);
             status = status && !(theta > parsec2_l && theta < parsec2_h);
           }
           // sector 3 has four gaps
@@ -2461,8 +2424,7 @@ Bool_t Fiducial::PiplFiducialCut(std::string beam_en, TVector3 momentum, Float_t
           parfidr[i] = fgPar_4Gev_2250_Pfidft2r[sector][j] + fgPar_4Gev_2250_Pfidft2r[sector][j + 1] / p;
         }
       }
-      phi45l = parfidl[0] * (parfidl[2] - 45) /
-               (45 - parfidl[2] + (parfidl[1] / parfidl[0])); // parametrized value of phi at theta=45 deg.
+      phi45l = parfidl[0] * (parfidl[2] - 45) / (45 - parfidl[2] + (parfidl[1] / parfidl[0])); // parametrized value of phi at theta=45 deg.
       phi45r = -parfidr[0] * (parfidr[2] - 45) / (45 - parfidr[2] + (parfidr[1] / parfidr[0]));
       if (theta > thetab) { // backward region defined by theta >45 deg.
         if (theta > 140)
@@ -2507,8 +2469,7 @@ Bool_t Fiducial::PiplFiducialCut(std::string beam_en, TVector3 momentum, Float_t
           theta_min = 14;
         else
           theta_min = 11; // for p<0.6 GeV/c Region theta starts from 14 deg., otherwise 11 deg.
-        cphil =
-            parfidl[0] * (parfidl[2] - theta) / (theta - parfidl[2] + (parfidl[1] / parfidl[0])); // hyperbolic function
+        cphil = parfidl[0] * (parfidl[2] - theta) / (theta - parfidl[2] + (parfidl[1] / parfidl[0])); // hyperbolic function
         cphir = -parfidr[0] * (parfidr[2] - theta) / (theta - parfidr[2] + (parfidr[1] / parfidr[0]));
       } else {                                                       // Backward region
         phi60l = parfidl[0] + parfidl[1] * 60. + parfidl[2] * 3600.; // parametrized value of phi at theta=60 deg.
@@ -2636,8 +2597,7 @@ Bool_t Fiducial::PiplFiducialCut(std::string beam_en, TVector3 momentum, Float_t
             for (int i = 0; i < 2; i++) {
               badpar2[i] = 0;
               // calculate the parameters using 1/p
-              badpar2[i] = fgPar_4Gev_2250_Pfid_ScpdS2_extra[i][0] +
-                           fgPar_4Gev_2250_Pfid_ScpdS2_extra[i][1] / mom_scpd +
+              badpar2[i] = fgPar_4Gev_2250_Pfid_ScpdS2_extra[i][0] + fgPar_4Gev_2250_Pfid_ScpdS2_extra[i][1] / mom_scpd +
                            fgPar_4Gev_2250_Pfid_ScpdS2_extra[i][2] / (mom_scpd * mom_scpd) +
                            fgPar_4Gev_2250_Pfid_ScpdS2_extra[i][3] / (mom_scpd * mom_scpd * mom_scpd);
             }
@@ -2649,8 +2609,7 @@ Bool_t Fiducial::PiplFiducialCut(std::string beam_en, TVector3 momentum, Float_t
             for (int i = 0; i < 8; i++) {
               badpar3[i] = 0;
               // calculate the parameters using 1/p
-              badpar3[i] = fgPar_4Gev_2250_Pfid_ScpdS3_extra[i][0] +
-                           fgPar_4Gev_2250_Pfid_ScpdS3_extra[i][1] / mom_scpd +
+              badpar3[i] = fgPar_4Gev_2250_Pfid_ScpdS3_extra[i][0] + fgPar_4Gev_2250_Pfid_ScpdS3_extra[i][1] / mom_scpd +
                            fgPar_4Gev_2250_Pfid_ScpdS3_extra[i][2] / (mom_scpd * mom_scpd) +
                            fgPar_4Gev_2250_Pfid_ScpdS3_extra[i][3] / (mom_scpd * mom_scpd * mom_scpd);
             }
@@ -2663,8 +2622,7 @@ Bool_t Fiducial::PiplFiducialCut(std::string beam_en, TVector3 momentum, Float_t
             for (int i = 0; i < 4; i++) {
               badpar4[i] = 0;
               // calculate the parameters using 1/p
-              badpar4[i] = fgPar_4Gev_2250_Pfid_ScpdS4_extra[i][0] +
-                           fgPar_4Gev_2250_Pfid_ScpdS4_extra[i][1] / mom_scpd +
+              badpar4[i] = fgPar_4Gev_2250_Pfid_ScpdS4_extra[i][0] + fgPar_4Gev_2250_Pfid_ScpdS4_extra[i][1] / mom_scpd +
                            fgPar_4Gev_2250_Pfid_ScpdS4_extra[i][2] / (mom_scpd * mom_scpd) +
                            fgPar_4Gev_2250_Pfid_ScpdS4_extra[i][3] / (mom_scpd * mom_scpd * mom_scpd);
             }
@@ -2677,8 +2635,7 @@ Bool_t Fiducial::PiplFiducialCut(std::string beam_en, TVector3 momentum, Float_t
             for (Int_t i = 0; i < 8; i++) {
               badpar5[i] = 0;
               // calculate the parameters using 1/p
-              badpar5[i] = fgPar_4Gev_2250_Pfid_ScpdS5_extra[i][0] +
-                           fgPar_4Gev_2250_Pfid_ScpdS5_extra[i][1] / mom_scpd +
+              badpar5[i] = fgPar_4Gev_2250_Pfid_ScpdS5_extra[i][0] + fgPar_4Gev_2250_Pfid_ScpdS5_extra[i][1] / mom_scpd +
                            fgPar_4Gev_2250_Pfid_ScpdS5_extra[i][2] / (mom_scpd * mom_scpd) +
                            fgPar_4Gev_2250_Pfid_ScpdS5_extra[i][3] / (mom_scpd * mom_scpd * mom_scpd);
             }
@@ -2772,15 +2729,13 @@ Bool_t Fiducial::PimiFiducialCutExtra(std::string beam_en, TVector3 momentum) {
 // PimiFiducialCut - Fiducial cuts function for e2a analysis
 //                   Two step process: 1) Cut on phi fiducial edges
 //                                     2) Remove bad TOF paddles
-//                   Uses 2 GeV pimi fiducial cuts for both 2 and 4 GeV analysis, from electron cuts plus low momentum
-//                   extension October 27th, 2020 - Theta gap parameters at 1 GeV (750A), and 2/4 GeV (2250A) updated to
-//                   replace reuse of
-//                                        electron gap functions, which are too messy to reuse accurately and account
-//                                        for CC cuts inappropriate to pions This update also includes Florian's update
-//                                        to loosen the constraint on upper limit of theta, which at high momentum is
-//                                        still much too tight A future update will implement new phi fiducial cuts at
-//                                        all momenta, but the current bug fixes are considered adequate for the zero
-//                                        pion analyses
+//                   Uses 2 GeV pimi fiducial cuts for both 2 and 4 GeV analysis, from electron cuts plus low momentum extension
+//                   October 27th, 2020 - Theta gap parameters at 1 GeV (750A), and 2/4 GeV (2250A) updated to replace reuse of
+//                                        electron gap functions, which are too messy to reuse accurately and account for CC cuts
+//                                        inappropriate to pions This update also includes Florian's update to loosen the constraint on
+//                                        upper limit of theta, which at high momentum is still much too tight A future update will
+//                                        implement new phi fiducial cuts at all momenta, but the current bug fixes are considered adequate
+//                                        for the zero pion analyses
 
 Bool_t Fiducial::PimiFiducialCut(std::string beam_en, TVector3 momentum, Float_t *pimi_philow, Float_t *pimi_phiup) {
 
@@ -2791,12 +2746,9 @@ Bool_t Fiducial::PimiFiducialCut(std::string beam_en, TVector3 momentum, Float_t
     double phi = GetPhi(momentum);
     double theta = GetTheta(momentum);
 
-    if (!(TMath::Abs(phi - CenterFirstSector) < PhiOpeningAngle ||
-          TMath::Abs(phi - CenterSecondSector) < PhiOpeningAngle ||
-          TMath::Abs(phi - CenterThirdSector) < PhiOpeningAngle ||
-          TMath::Abs(phi - CenterFourthSector) < PhiOpeningAngle ||
-          TMath::Abs(phi - CenterFifthSector) < PhiOpeningAngle ||
-          TMath::Abs(phi - CenterSixthSector) < PhiOpeningAngle)) {
+    if (!(TMath::Abs(phi - CenterFirstSector) < PhiOpeningAngle || TMath::Abs(phi - CenterSecondSector) < PhiOpeningAngle ||
+          TMath::Abs(phi - CenterThirdSector) < PhiOpeningAngle || TMath::Abs(phi - CenterFourthSector) < PhiOpeningAngle ||
+          TMath::Abs(phi - CenterFifthSector) < PhiOpeningAngle || TMath::Abs(phi - CenterSixthSector) < PhiOpeningAngle)) {
       status = false;
     }
 
@@ -2826,8 +2778,8 @@ Bool_t Fiducial::PimiFiducialCut(std::string beam_en, TVector3 momentum, Float_t
     int tsector = sector + 1; // temporary variable for counting sector number, given arrays start at 0
 
     double phi_deg = phi * 180. / M_PI;
-    phi_deg -= sector * 60; // fiducial cuts defined using individual sector distributions, redrawn to be centred on 0
-                            // degrees in phi. This angle allows those cut definitions to be applied
+    phi_deg -= sector * 60; // fiducial cuts defined using individual sector distributions, redrawn to be centred on 0 degrees in phi. This
+                            // angle allows those cut definitions to be applied
 
     double theta = mom.Theta();
     double theta_deg = theta * 180. / M_PI;
@@ -2861,8 +2813,8 @@ Bool_t Fiducial::PimiFiducialCut(std::string beam_en, TVector3 momentum, Float_t
         for (Int_t mompar = 0; mompar < 6; mompar++) {
           for (Int_t phipar = 0; phipar < 5; phipar++) {
             phipars[phipar] += fgPar_1gev_1500_Pimfid[sector][phipar][mompar] * pow(mom_pi, mompar);
-            // std::cout << mom_e << " " << mompar << " " << phipar << " " << phipars[1] << " " << phipars[2] << " " <<
-            // phipars[3] << " " << phipars[4] << " " << phipars[5] << std::endl;
+            // std::cout << mom_e << " " << mompar << " " << phipar << " " << phipars[1] << " " << phipars[2] << " " << phipars[3] << " " <<
+            // phipars[4] << " " << phipars[5] << std::endl;
           }
         }
 
@@ -2950,8 +2902,7 @@ Bool_t Fiducial::PimiFiducialCut(std::string beam_en, TVector3 momentum, Float_t
                 for (int i = 0; i < 4; i++) {
                   badpar3[i] = 0;
                   // calculate the parameters using 1/p
-                  badpar3[i] = fgPar_1gev_1500_Pimfid_Theta_S3_extra[i][0] +
-                               fgPar_1gev_1500_Pimfid_Theta_S3_extra[i][1] / mom_pi +
+                  badpar3[i] = fgPar_1gev_1500_Pimfid_Theta_S3_extra[i][0] + fgPar_1gev_1500_Pimfid_Theta_S3_extra[i][1] / mom_pi +
                                fgPar_1gev_1500_Pimfid_Theta_S3_extra[i][2] / (mom_pi * mom_pi) +
                                fgPar_1gev_1500_Pimfid_Theta_S3_extra[i][3] / (mom_pi * mom_pi * mom_pi);
                 }
@@ -2964,8 +2915,7 @@ Bool_t Fiducial::PimiFiducialCut(std::string beam_en, TVector3 momentum, Float_t
                 for (int i = 0; i < 2; i++) {
                   badpar4[i] = 0;
                   // calculate the parameters using 1/p
-                  badpar4[i] = fgPar_1gev_1500_Pimfid_Theta_S4_extra[i][0] +
-                               fgPar_1gev_1500_Pimfid_Theta_S4_extra[i][1] / mom_pi +
+                  badpar4[i] = fgPar_1gev_1500_Pimfid_Theta_S4_extra[i][0] + fgPar_1gev_1500_Pimfid_Theta_S4_extra[i][1] / mom_pi +
                                fgPar_1gev_1500_Pimfid_Theta_S4_extra[i][2] / (mom_pi * mom_pi) +
                                fgPar_1gev_1500_Pimfid_Theta_S4_extra[i][3] / (mom_pi * mom_pi * mom_pi);
                 }
@@ -2977,8 +2927,7 @@ Bool_t Fiducial::PimiFiducialCut(std::string beam_en, TVector3 momentum, Float_t
                 for (Int_t i = 0; i < 8; i++) {
                   badpar5[i] = 0;
                   // calculate the parameters using 1/p
-                  badpar5[i] = fgPar_1gev_1500_Pimfid_Theta_S5_extra[i][0] +
-                               fgPar_1gev_1500_Pimfid_Theta_S5_extra[i][1] / mom_pi +
+                  badpar5[i] = fgPar_1gev_1500_Pimfid_Theta_S5_extra[i][0] + fgPar_1gev_1500_Pimfid_Theta_S5_extra[i][1] / mom_pi +
                                fgPar_1gev_1500_Pimfid_Theta_S5_extra[i][2] / (mom_pi * mom_pi) +
                                fgPar_1gev_1500_Pimfid_Theta_S5_extra[i][3] / (mom_pi * mom_pi * mom_pi);
                 }
@@ -3012,8 +2961,8 @@ Bool_t Fiducial::PimiFiducialCut(std::string beam_en, TVector3 momentum, Float_t
         for (Int_t mompar = 0; mompar < 6; mompar++) {
           for (Int_t phipar = 0; phipar < 5; phipar++) {
             phipars[phipar] += fgPar_1gev_750_Pimfid[sector][phipar][mompar] * pow(mom_pi, mompar);
-            // std::cout << p << " " << mompar << " " << phipar << " " << phipars[1] << " " << phipars[2] << " " <<
-            // phipars[3] << " " << phipars[4] << " " << phipars[5] << std::endl;
+            // std::cout << p << " " << mompar << " " << phipar << " " << phipars[1] << " " << phipars[2] << " " << phipars[3] << " " <<
+            // phipars[4] << " " << phipars[5] << std::endl;
           }
         }
 
@@ -3046,38 +2995,34 @@ Bool_t Fiducial::PimiFiducialCut(std::string beam_en, TVector3 momentum, Float_t
         if (SCpdcut) { // if the SCpdCut bit is set, take off the bad SC paddle by strictly cutting off a theta gap.
           if (status) {
             mom_pi = mom.Mag();
-            // Reset ignores mom_e > 1.1 cut from above. Is this okay? F.H. 10/31/19  - Yes, as it applies the theta cut
-            // functions at all momenta SF 10/11/20
+            // Reset ignores mom_e > 1.1 cut from above. Is this okay? F.H. 10/31/19  - Yes, as it applies the theta cut functions at all
+            // momenta SF 10/11/20
 
             // could probably replace parsec[1,6]_{l/h} with
             // double thetaCutLo, thetaCutHi;
             // and eventually propagate to all theta gap determinations
 
-            // Using a set of fid_1gev_750_pimifid_S[1,6] parameters, hard coded in Fiducial.h, to avoid confusion with
-            // electron, althoug some parameters are the same sector 1 has one gap
+            // Using a set of fid_1gev_750_pimifid_S[1,6] parameters, hard coded in Fiducial.h, to avoid confusion with electron, althoug
+            // some parameters are the same sector 1 has one gap
             if (tsector == 1) {
               double parsec1_l, parsec1_h;
               // Evaluate theta gap boundaries from saved parameters
               parsec1_l = fid_1gev_750_pimifid_S1[0][0] + fid_1gev_750_pimifid_S1[0][1] / mom_pi +
-                          fid_1gev_750_pimifid_S1[0][2] / (mom_pi * mom_pi) +
-                          fid_1gev_750_pimifid_S1[0][3] / (mom_pi * mom_pi * mom_pi);
+                          fid_1gev_750_pimifid_S1[0][2] / (mom_pi * mom_pi) + fid_1gev_750_pimifid_S1[0][3] / (mom_pi * mom_pi * mom_pi);
               parsec1_h = fid_1gev_750_pimifid_S1[1][0] + fid_1gev_750_pimifid_S1[1][1] / mom_pi +
-                          fid_1gev_750_pimifid_S1[1][2] / (mom_pi * mom_pi) +
-                          fid_1gev_750_pimifid_S1[1][3] / (mom_pi * mom_pi * mom_pi);
+                          fid_1gev_750_pimifid_S1[1][2] / (mom_pi * mom_pi) + fid_1gev_750_pimifid_S1[1][3] / (mom_pi * mom_pi * mom_pi);
 
               status = status && !(theta_deg > parsec1_l && theta_deg < parsec1_h);
             }
-            // //sector 2 has one gap, however, it doesn't seem to be present in pi minus, it may be a CC gap and only
-            // applicable to electrons
+            // //sector 2 has one gap, however, it doesn't seem to be present in pi minus, it may be a CC gap and only applicable to
+            // electrons
             //           if(tsector == 2){
             //             double parsec2_l,parsec2_h;
             //             if(mom_pi<0.4) mom_pi=0.4;
             // 	    //Evaluate theta gap boundaries from saved parameters
             //             parsec2_l= fid_1gev_750_pimifid_S2[0][0]+fid_1gev_750_pimifid_S2[0][1]/mom_pi
-            //             +fid_1gev_750_pimifid_S2[0][2]/(mom_pi*mom_pi)
-            //             +fid_1gev_750_pimifid_S2[0][3]/(mom_pi*mom_pi*mom_pi); parsec2_h=
-            //             fid_1gev_750_pimifid_S2[1][0]+fid_1gev_750_pimifid_S2[1][1]/mom_pi
-            //             +fid_1gev_750_pimifid_S2[1][2]/(mom_pi*mom_pi)
+            //             +fid_1gev_750_pimifid_S2[0][2]/(mom_pi*mom_pi) +fid_1gev_750_pimifid_S2[0][3]/(mom_pi*mom_pi*mom_pi); parsec2_h=
+            //             fid_1gev_750_pimifid_S2[1][0]+fid_1gev_750_pimifid_S2[1][1]/mom_pi +fid_1gev_750_pimifid_S2[1][2]/(mom_pi*mom_pi)
             //             +fid_1gev_750_pimifid_S2[1][3]/(mom_pi*mom_pi*mom_pi);
 
             //             status = status && !(theta_deg>parsec2_l && theta_deg<parsec2_h);
@@ -3097,8 +3042,8 @@ Bool_t Fiducial::PimiFiducialCut(std::string beam_en, TVector3 momentum, Float_t
                 status = status && !(theta_deg > parsec3_l[d] && theta_deg < parsec3_h[d]);
               }
             }
-            // sector 4 has two gaps, however, the first gap is probably a CC gap, and not applicable to the pi minus,
-            // an additional TOF gap replaces this
+            // sector 4 has two gaps, however, the first gap is probably a CC gap, and not applicable to the pi minus, an additional TOF gap
+            // replaces this
             else if (tsector == 4) {
               double parsec4_l[2], parsec4_h[2];
               for (int d = 0; d < 2; d++) {
@@ -3145,31 +3090,30 @@ Bool_t Fiducial::PimiFiducialCut(std::string beam_en, TVector3 momentum, Float_t
     }
 
     //--------------------------------------------------------------
-    // 2.2 and 4.4 GeV - uses 2.2 GeV electron cuts, plus a weird fudge at pion momenta below 350 MeV //This MUST be
-    // replaced by bespoke cuts
+    // 2.2 and 4.4 GeV - uses 2.2 GeV electron cuts, plus a weird fudge at pion momenta below 350 MeV //This MUST be replaced by bespoke
+    // cuts
     //--------------------------------------------------------------
     if (en_beam[fbeam_en] > 2. && en_beam[fbeam_en] < 5. && fTorusCurrent > 2240 && fTorusCurrent < 2260) {
 
       Float_t phimin, phimax;
 
-      //        Float_t par[6];               // six parameters to determine the outline of Theta vs Phi  //why six
-      //        parameters? it's five everywhere else...
+      //        Float_t par[6];               // six parameters to determine the outline of Theta vs Phi  //why six parameters? it's five
+      //        everywhere else...
       // p_theta == mom_pi
-      // theta maximum limit functions only defined in the momentum range 0.1 - 2.075 //is this an appropriate maximum
-      // at 4 GeV?
+      // theta maximum limit functions only defined in the momentum range 0.1 - 2.075 //is this an appropriate maximum at 4 GeV?
       if (p_theta > 2.075) {
         p_theta = 2.075;
       } else if (p_theta < 0.1) {
         p_theta = 0.1;
       }
 
-      // calculate theta limit from loaded parameters (is this thetamax[0] + mom*thetamax[1] + mom^2*thetamax[2] +
-      // mom^3*thetamax[3] + mom^4*thetamax[4]?)
+      // calculate theta limit from loaded parameters (is this thetamax[0] + mom*thetamax[1] + mom^2*thetamax[2] + mom^3*thetamax[3] +
+      // mom^4*thetamax[4]?)
       for (int i = 4; i >= 0; i--) {
         thetamax = thetamax * p_theta + pimi_thetamax2and4[i]; // upper theta limit for pi- at different momentum
       }
-      // std::cout << "pion minus: mom " << p_theta << " , phi " << phi << " , phi_deg " << phi_deg << " , sector " <<
-      // sector << " , thetamax " << thetamax << std::endl;
+      // std::cout << "pion minus: mom " << p_theta << " , phi " << phi << " , phi_deg " << phi_deg << " , sector " << sector << " ,
+      // thetamax " << thetamax << std::endl;
       //---These are the reused electron parameters
       if (mom_pi > 0.35) { // theta vs phi outline for high p region obtained by Bin
 
@@ -3177,8 +3121,7 @@ Bool_t Fiducial::PimiFiducialCut(std::string beam_en, TVector3 momentum, Float_t
           mom_pi = 2.; // to extrapolate the cut to higher momenta for pimi //(to badly extrapolate) S.F. October 2020
         }
 
-        Float_t par[6]; // six parameters to determine the outline of Theta vs Phi  //why six parameters? it's five
-                        // everywhere else...
+        Float_t par[6]; // six parameters to determine the outline of Theta vs Phi  //why six parameters? it's five everywhere else...
 
         for (Int_t i = 0; i < 6; i++) {
           par[i] = 0;
@@ -3186,10 +3129,8 @@ Bool_t Fiducial::PimiFiducialCut(std::string beam_en, TVector3 momentum, Float_t
             par[i] = par[i] * mom_pi + fgPar_2GeV_2250_Efid[sector][i][d];
           } // calculate the parameters using pol8
         }
-        double phi_min_limit =
-            par[3] / ((50.0 - par[0]) + par[3] / par[2]) - par[2]; // calculation of phi limit from theta at 50 degree
-        double phi_max_limit =
-            par[2] - par[3] / ((50.0 - par[0]) + par[3] / par[2]); // calculation of phi limit from theta at 50 degree
+        double phi_min_limit = par[3] / ((50.0 - par[0]) + par[3] / par[2]) - par[2]; // calculation of phi limit from theta at 50 degree
+        double phi_max_limit = par[2] - par[3] / ((50.0 - par[0]) + par[3] / par[2]); // calculation of phi limit from theta at 50 degree
 
         //  std::cout << "par[0] " << par[0] << " , par[1] " << par[1] <<  std::endl;
         if (phi_deg < 0) {
@@ -3203,9 +3144,8 @@ Bool_t Fiducial::PimiFiducialCut(std::string beam_en, TVector3 momentum, Float_t
           // cut is removed and a cut on phi to phi_limit is added similar to piplus at 2.2 where limits are hardcoded
           // also a cut for thetamax is added
           status = (theta_deg > tmptheta && tmptheta >= par[0] && phi_deg >= phi_min_limit && theta_deg <= thetamax);
-          //  std::cout << "status " << status << " , theta_deg " << theta_deg << ", tmptheta " << tmptheta << " ,
-          //  phimin " << phimin << " , phimax " << phimax << " , phi_deg " << phi_deg << " , sector " << sector << " ,
-          //  thetamax " << thetamax << std::endl;
+          //  std::cout << "status " << status << " , theta_deg " << theta_deg << ", tmptheta " << tmptheta << " , phimin " << phimin << " ,
+          //  phimax " << phimax << " , phi_deg " << phi_deg << " , sector " << sector << " , thetamax " << thetamax << std::endl;
         } else {
           Float_t tmptheta = par[0] - par[5] / par[4] + par[5] / (par[4] - phi_deg);
           phimin = par[5] / ((theta_deg - par[0]) + par[5] / par[4]) - par[4];
@@ -3229,8 +3169,8 @@ Bool_t Fiducial::PimiFiducialCut(std::string beam_en, TVector3 momentum, Float_t
         else if (mom_pi < 0.125)
           mom_pi = 0.125; // This shouldn't do anything at all, as pions are selected from 150 MeV
 
-        Float_t params[6]; // six parameters to determine the outline of Theta vs Phi, like the higher momentum region
-                           // above.  Can change to par[6] and share declaration with above
+        Float_t params[6]; // six parameters to determine the outline of Theta vs Phi, like the higher momentum region above.  Can change to
+                           // par[6] and share declaration with above
         for (Int_t i = 0; i < 6; i++) {
           params[i] = 0;
           for (Int_t d = 4; d >= 0; d--) {
@@ -3244,9 +3184,8 @@ Bool_t Fiducial::PimiFiducialCut(std::string beam_en, TVector3 momentum, Float_t
           status = (phi_deg > phimin && theta_deg > params[0] && theta_deg <= thetamax);
         } else {
           // where's phimin?
-          phimax = params[2] -
-                   params[4] / ((theta_deg - params[0]) +
-                                params[4] / params[2]); // why is phimax calculated differently in the low momentum?
+          phimax = params[2] - params[4] / ((theta_deg - params[0]) +
+                                            params[4] / params[2]); // why is phimax calculated differently in the low momentum?
           status = (phi_deg < phimax && theta_deg > params[0] && theta_deg <= thetamax);
         }
       } // end of low momentum cut
@@ -3267,11 +3206,9 @@ Bool_t Fiducial::PimiFiducialCut(std::string beam_en, TVector3 momentum, Float_t
         if (status) { // if event not already rejected
 
           //---Further gaps obtained with pi- ------
-          // Gaps obtained with pi-. Includes redefined versions of some electron gaps from
-          // fgPar_2GeV_2250_EfidThets_S{1-6}. S.F Oct 26, 2020
-          mom_pi =
-              momentum
-                  .Mag(); // reset momentum to event value, just in case the electron paddle nonsense causes problems
+          // Gaps obtained with pi-. Includes redefined versions of some electron gaps from fgPar_2GeV_2250_EfidThets_S{1-6}. S.F Oct 26,
+          // 2020
+          mom_pi = momentum.Mag(); // reset momentum to event value, just in case the electron paddle nonsense causes problems
           // sector 1 has two gaps
           if (tsector == 1) {
             double parsec1_l[2], parsec1_h[2]; // theta gap paramaters
@@ -3335,8 +3272,8 @@ Bool_t Fiducial::PimiFiducialCut(std::string beam_en, TVector3 momentum, Float_t
               status = status && !(theta_deg > parsec5_l[d] && theta_deg < parsec5_h[d]);
             }
           }
-          // sector 6 has one gap, a gap that could be replaced by a box cut between 58 and 65 degrees to some momentum
-          // limit (probably a DC region failure)
+          // sector 6 has one gap, a gap that could be replaced by a box cut between 58 and 65 degrees to some momentum limit (probably a DC
+          // region failure)
           if (tsector == 6) {
             double parsec6_l, parsec6_h;
             if (mom_pi < 0.175)
@@ -3344,11 +3281,9 @@ Bool_t Fiducial::PimiFiducialCut(std::string beam_en, TVector3 momentum, Float_t
             else if (mom_pi > 0.275)
               mom_pi = 0.275;
             parsec6_l = fid_2gev_2250_pimifid_S6[0][0] + fid_2gev_2250_pimifid_S6[0][1] / mom_pi +
-                        fid_2gev_2250_pimifid_S6[0][2] / (mom_pi * mom_pi) +
-                        fid_2gev_2250_pimifid_S6[0][3] / (mom_pi * mom_pi * mom_pi);
+                        fid_2gev_2250_pimifid_S6[0][2] / (mom_pi * mom_pi) + fid_2gev_2250_pimifid_S6[0][3] / (mom_pi * mom_pi * mom_pi);
             parsec6_h = fid_2gev_2250_pimifid_S6[1][0] + fid_2gev_2250_pimifid_S6[1][1] / mom_pi +
-                        fid_2gev_2250_pimifid_S6[1][2] / (mom_pi * mom_pi) +
-                        fid_2gev_2250_pimifid_S6[1][3] / (mom_pi * mom_pi * mom_pi);
+                        fid_2gev_2250_pimifid_S6[1][2] / (mom_pi * mom_pi) + fid_2gev_2250_pimifid_S6[1][3] / (mom_pi * mom_pi * mom_pi);
             status = status && !(theta_deg > parsec6_l && theta_deg < parsec6_h);
           }
           ////end of gaps with pi-
@@ -3382,21 +3317,20 @@ bool Fiducial::Phot_fid(TVector3 V3_phot) {
   if (phi_deg < 0)
     phi_deg = phi_deg + 360;
   bool hot_spot = (phi_deg > 185 && phi_deg < 191 && costheta < 0.71 && costheta > 0.67) ||
-                  (phi_deg > 221 && phi_deg < 236 && costheta < 0.73 &&
-                   costheta > 0.67); // used to kill the two hot spots in sector 4
+                  (phi_deg > 221 && phi_deg < 236 && costheta < 0.73 && costheta > 0.67); // used to kill the two hot spots in sector 4
 
-  if ((costheta > low_lim1_ec->Eval(phi_deg) && costheta < up_lim1_ec->Eval(phi_deg) &&
-       costheta < rightside_lim1_ec->Eval(phi_deg) && costheta < leftside_lim1_ec->Eval(phi_deg)) ||
-      (costheta > low_lim2_ec->Eval(phi_deg) && costheta < up_lim2_ec->Eval(phi_deg) &&
-       costheta < rightside_lim2_ec->Eval(phi_deg) && costheta < leftside_lim2_ec->Eval(phi_deg)) ||
-      (costheta > low_lim3_ec->Eval(phi_deg) && costheta < up_lim3_ec->Eval(phi_deg) &&
-       costheta < rightside_lim3_ec->Eval(phi_deg) && costheta < leftside_lim3_ec->Eval(phi_deg)) ||
-      (costheta > low_lim4_ec->Eval(phi_deg) && costheta < up_lim4_ec->Eval(phi_deg) &&
-       costheta < rightside_lim4_ec->Eval(phi_deg) && costheta < leftside_lim4_ec->Eval(phi_deg) && !hot_spot) ||
-      (costheta > low_lim5_ec->Eval(phi_deg) && costheta < up_lim5_ec->Eval(phi_deg) &&
-       costheta < rightside_lim5_ec->Eval(phi_deg) && costheta < leftside_lim5_ec->Eval(phi_deg)) ||
-      (costheta > low_lim6_ec->Eval(phi_deg) && costheta < up_lim6_ec->Eval(phi_deg) &&
-       costheta < rightside_lim6_ec->Eval(phi_deg) && costheta < leftside_lim6_ec->Eval(phi_deg))) { // EC only
+  if ((costheta > low_lim1_ec->Eval(phi_deg) && costheta < up_lim1_ec->Eval(phi_deg) && costheta < rightside_lim1_ec->Eval(phi_deg) &&
+       costheta < leftside_lim1_ec->Eval(phi_deg)) ||
+      (costheta > low_lim2_ec->Eval(phi_deg) && costheta < up_lim2_ec->Eval(phi_deg) && costheta < rightside_lim2_ec->Eval(phi_deg) &&
+       costheta < leftside_lim2_ec->Eval(phi_deg)) ||
+      (costheta > low_lim3_ec->Eval(phi_deg) && costheta < up_lim3_ec->Eval(phi_deg) && costheta < rightside_lim3_ec->Eval(phi_deg) &&
+       costheta < leftside_lim3_ec->Eval(phi_deg)) ||
+      (costheta > low_lim4_ec->Eval(phi_deg) && costheta < up_lim4_ec->Eval(phi_deg) && costheta < rightside_lim4_ec->Eval(phi_deg) &&
+       costheta < leftside_lim4_ec->Eval(phi_deg) && !hot_spot) ||
+      (costheta > low_lim5_ec->Eval(phi_deg) && costheta < up_lim5_ec->Eval(phi_deg) && costheta < rightside_lim5_ec->Eval(phi_deg) &&
+       costheta < leftside_lim5_ec->Eval(phi_deg)) ||
+      (costheta > low_lim6_ec->Eval(phi_deg) && costheta < up_lim6_ec->Eval(phi_deg) && costheta < rightside_lim6_ec->Eval(phi_deg) &&
+       costheta < leftside_lim6_ec->Eval(phi_deg))) { // EC only
     status = true;
   } else {
     status = false;

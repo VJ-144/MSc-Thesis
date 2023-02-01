@@ -54,8 +54,8 @@ int main(int argc, char **argv) {
     std::cout << "\\-------------------------------------------------------/" << std::endl;
     std::cout << std::endl; // separate output
     std::cout << "====== Usage ======" << std::endl;
-    std::cout << "./genie_analysis target beam_energy 0/1 #rot 0/1/2 0/1 thetaEl_lb thetaEl_ub elMom_lb 0/1/2 0/1 "
-                 "thetaProt_lb thetaProt_ub protMom_lb protMom_ub"
+    std::cout << "./genie_analysis target beam_energy 0/1 #rot 0/1/2 0/1 thetaEl_lb thetaEl_ub elMom_lb 0/1/2 0/1 thetaProt_lb "
+                 "thetaProt_ub protMom_lb protMom_ub"
               << std::endl;
     exit(1);
   }
@@ -81,121 +81,115 @@ int main(int argc, char **argv) {
   int NumOfProton = atoi(argv[17]);
 
   if (choice != 2 && choice != 1 && choice != 0) {
-    std::cout << "Unknown option for data type (parameter 3). It should be either 0 or 1 (or 2). The given value is "
-              << choice << std::endl;
+    std::cout << "Unknown option for data type (parameter 3). It should be either 0 or 1 (or 2). The given value is " << choice
+              << std::endl;
     return 0;
   }
 
   if (rotations <= 0) {
-    std::cout << "Not a valid number for the number of rotations (parameter 4). It should be greater than 0. The given "
-                 "value is "
+    std::cout << "Not a valid number for the number of rotations (parameter 4). It should be greater than 0. The given value is "
               << rotations << std::endl;
     return 0;
   }
 
   if (elSectors_flag != 2 && elSectors_flag != 1 && elSectors_flag != 0) {
-    std::cout << "Unknown flag for electron sectors (parameter 5). It should be either 0, 1, or 2. The given value is "
-              << elSectors_flag << std::endl;
-    std::cout << "If you are wanting to add a new option for this parameter, make sure you propogate all changes in "
-                 "genie_analysis.h, genie_analysis.C, and run_genie_analysis.C."
+    std::cout << "Unknown flag for electron sectors (parameter 5). It should be either 0, 1, or 2. The given value is " << elSectors_flag
+              << std::endl;
+    std::cout << "If you are wanting to add a new option for this parameter, make sure you propogate all changes in genie_analysis.h, "
+                 "genie_analysis.C, and run_genie_analysis.C."
               << std::endl;
     return 0;
   }
 
   if (deltaPhiEl != 1 && deltaPhiEl != 0) {
-    std::cout << "Not a valid number for Delta-phi for the electron (parameter 6). It should be either 0 or 1. The "
-                 "given value is "
+    std::cout << "Not a valid number for Delta-phi for the electron (parameter 6). It should be either 0 or 1. The given value is "
               << deltaPhiEl << std::endl;
     return 0;
   }
 
   if (thetaEl_lb < 0 || thetaEl_lb > 180) {
-    std::cout << "Not a valid number for the electron theta lower bound (parameter 7). It should be between 0 and 180 "
-                 "(inclusive). The given value is "
+    std::cout << "Not a valid number for the electron theta lower bound (parameter 7). It should be between 0 and 180 (inclusive). The "
+                 "given value is "
               << thetaEl_lb << std::endl;
     return 0;
   }
 
   if (thetaEl_ub < 0 || thetaEl_ub > 180) {
-    std::cout << "Not a valid number for the electron theta upper bound (parameter 8). It should be between 0 and 180 "
-                 "(inclusive). The given value is "
+    std::cout << "Not a valid number for the electron theta upper bound (parameter 8). It should be between 0 and 180 (inclusive). The "
+                 "given value is "
               << thetaEl_ub << std::endl;
     return 0;
   }
 
   if (thetaEl_lb > thetaEl_ub) {
-    std::cout << "The electron theta lower bound (parameter 7) must be less than or equal to the electron theta upper "
-                 "bound (parameter 8)."
+    std::cout << "The electron theta lower bound (parameter 7) must be less than or equal to the electron theta upper bound (parameter 8)."
               << std::endl;
     return 0;
   }
 
   if (elMom_lb < 0) {
-    std::cout << "Not a valid number for the electron momentum lower bound (parameter 9). It should be greater than or "
-                 "equal to 0. The given value is "
+    std::cout << "Not a valid number for the electron momentum lower bound (parameter 9). It should be greater than or equal to 0. The "
+                 "given value is "
               << elMom_lb << std::endl;
     return 0;
   }
 
   if (protSectors_flag != 1 && protSectors_flag != 0) {
-    std::cout << "Unknown flag for proton sectors (parameter 10). It should be either 0 or 1. The given value is "
-              << protSectors_flag << std::endl;
-    std::cout << "If you are wanting to add a new option for this parameter, make sure you propogate all changes in "
-                 "genie_analysis.h, genie_analysis.C, and run_genie_analysis.C."
+    std::cout << "Unknown flag for proton sectors (parameter 10). It should be either 0 or 1. The given value is " << protSectors_flag
+              << std::endl;
+    std::cout << "If you are wanting to add a new option for this parameter, make sure you propogate all changes in genie_analysis.h, "
+                 "genie_analysis.C, and run_genie_analysis.C."
               << std::endl;
     return 0;
   }
 
   if (deltaPhiProt != 1 && deltaPhiProt != 0) {
-    std::cout << "Not a valid number for Delta-phi for the proton (parameter 11). It should be either 0 or 1. The "
-                 "given value is "
+    std::cout << "Not a valid number for Delta-phi for the proton (parameter 11). It should be either 0 or 1. The given value is "
               << deltaPhiProt << std::endl;
     return 0;
   }
 
   if (thetaProt_lb < 0 || thetaProt_lb > 180) {
-    std::cout << "Not a valid number for the proton theta lower bound (parameter 12). It should be between 0 and 180 "
-                 "(inclusive). The given value is "
+    std::cout << "Not a valid number for the proton theta lower bound (parameter 12). It should be between 0 and 180 (inclusive). The "
+                 "given value is "
               << thetaProt_lb << std::endl;
     return 0;
   }
 
   if (thetaProt_ub < 0 || thetaProt_ub > 180) {
-    std::cout << "Not a valid number for the proton theta upper bound (parameter 13). It should be between 0 and 180 "
-                 "(inclusive). The given value is "
+    std::cout << "Not a valid number for the proton theta upper bound (parameter 13). It should be between 0 and 180 (inclusive). The "
+                 "given value is "
               << thetaProt_ub << std::endl;
     return 0;
   }
 
   if (thetaProt_lb > thetaProt_ub) {
-    std::cout << "The proton theta lower bound (parameter 12) must be less than or equal to the proton theta upper "
-                 "bound (parameter 13)."
+    std::cout << "The proton theta lower bound (parameter 12) must be less than or equal to the proton theta upper bound (parameter 13)."
               << std::endl;
     return 0;
   }
 
   if (protMom_lb < 0) {
-    std::cout << "Not a valid number for the proton momentum lower bound (parameter 14). It should be greater than or "
-                 "equal to 0. The given value is "
+    std::cout << "Not a valid number for the proton momentum lower bound (parameter 14). It should be greater than or equal to 0. The "
+                 "given value is "
               << protMom_lb << std::endl;
     return 0;
   }
   if (protMom_ub < 0) {
-    std::cout << "Not a valid number for the proton momentum upper bound (parameter 15). It should be greater than or "
-                 "equal to 0. The given value is "
+    std::cout << "Not a valid number for the proton momentum upper bound (parameter 15). It should be greater than or equal to 0. The "
+                 "given value is "
               << protMom_ub << std::endl;
     return 0;
   }
   if (protMom_lb > protMom_ub) {
-    std::cout << "The proton momentum lower bound (parameter 14) must be less than or equal to the proton momentum "
-                 "upper bound (parameter 15)."
-              << std::endl;
+    std::cout
+        << "The proton momentum lower bound (parameter 14) must be less than or equal to the proton momentum upper bound (parameter 15)."
+        << std::endl;
     return 0;
   }
 
-  genie_analysis t(target, beam_en, rotations, choice, elSectors_flag, deltaPhiEl, thetaEl_lb, thetaEl_ub, elMom_lb,
-                   protSectors_flag, deltaPhiProt, thetaProt_lb, thetaProt_ub, protMom_lb, protMom_ub, NumOfProton,
-                   detector_acceptance);
+  genie_analysis t(target, beam_en, rotations, choice, elSectors_flag, deltaPhiEl, thetaEl_lb, thetaEl_ub, elMom_lb, protSectors_flag,
+                   deltaPhiProt, thetaProt_lb, thetaProt_ub, protMom_lb, protMom_ub, NumOfProton, detector_acceptance);
   t.Loop();
 
   return 0;

@@ -19,8 +19,8 @@
 struct Subtraction {
   // initialize Beam Energy String, Target Name String, Map of binding energies and Fiducial cuts
   // N_tot of rotations, q vector is set to (0,0,0)
-  void InitSubtraction(std::string in_beam_en, std::string in_target_name, std::map<std::string, double> in_bind_en,
-                       int in_nrot, Fiducial *in_fiducial) {
+  void InitSubtraction(std::string in_beam_en, std::string in_target_name, std::map<std::string, double> in_bind_en, int in_nrot,
+                       Fiducial *in_fiducial) {
     std::cout << " Subtraction start of initialize " << std::endl;
     fbeam_en = in_beam_en;
     target_name = in_target_name;
@@ -43,20 +43,19 @@ struct Subtraction {
   void prot1_pi1_rot_func(TVector3 V3prot, TVector3 V3pi, int q_pi, double *N_pi_p, double *N_nopi_p);
   void prot1_pi2_rot_func(TVector3 V3prot, TVector3 V3pi[2], int q_pi[2], double *P_1p0pi, double P_1p1pi[2]);
   void prot1_pi3_rot_func(TVector3 V3prot, TVector3 V3pi[3], int q_pi[3], double *P_tot);
-  void prot2_pi1_rot_func(TVector3 V3_2prot_corr[2], TVector3 V3_2prot_uncorr[2], TVector3 V3_1pi, int q_pi,
-                          TLorentzVector V4_el, double Ecal_2p1pi_to2p0pi[2], double p_miss_perp_2p1pi_to2p0pi[2],
-                          double P_2p1pito2p0pi[2], double P_2p1pito1p1pi[2], double P_2p1pito1p0pi[2], double *P_tot);
-  void prot2_pi2_rot_func(TVector3 V3_2prot_corr[2], TVector3 V3_2prot_uncorr[2], TVector3 V3_2pi[2], int q_pi[2],
-                          TLorentzVector V4_el, double Ecal_2p2pi[2], double p_miss_perp_2p2pi[2], double P_tot_2p[2]);
-  void prot3_pi1_rot_func(TVector3 V3_3prot_corr[3], TVector3 V3_3prot_uncorr[3], TVector3 V3_pi, int q_pi,
-                          TLorentzVector V4_el, double Ecal_3p1pi[3], double p_miss_perp_3p1pi[3], double P_tot_3p[3]);
+  void prot2_pi1_rot_func(TVector3 V3_2prot_corr[2], TVector3 V3_2prot_uncorr[2], TVector3 V3_1pi, int q_pi, TLorentzVector V4_el,
+                          double Ecal_2p1pi_to2p0pi[2], double p_miss_perp_2p1pi_to2p0pi[2], double P_2p1pito2p0pi[2],
+                          double P_2p1pito1p1pi[2], double P_2p1pito1p0pi[2], double *P_tot);
+  void prot2_pi2_rot_func(TVector3 V3_2prot_corr[2], TVector3 V3_2prot_uncorr[2], TVector3 V3_2pi[2], int q_pi[2], TLorentzVector V4_el,
+                          double Ecal_2p2pi[2], double p_miss_perp_2p2pi[2], double P_tot_2p[2]);
+  void prot3_pi1_rot_func(TVector3 V3_3prot_corr[3], TVector3 V3_3prot_uncorr[3], TVector3 V3_pi, int q_pi, TLorentzVector V4_el,
+                          double Ecal_3p1pi[3], double p_miss_perp_3p1pi[3], double P_tot_3p[3]);
 
   void pi1_rot_func(TVector3 V3_pi, int q_pi, double *P_pi);
   void pi2_rot_func(TVector3 V3_pi[2], int q_pi[2], double *P_0pi, double P_1pi[2]);
-  void pi3_rot_func(TVector3 V3_pi[3], int q_pi[3], double *P_0pi, double P_1pi[3], double P_320[3],
-                    double P_3210[][2]);
-  void pi4_rot_func(TVector3 V3_pi[4], int q_pi[4], double *P_0pi, double *P_410, double *P_420, double *P_4210,
-                    double *P_430, double *P_4310, double *P_4320, double *P_43210);
+  void pi3_rot_func(TVector3 V3_pi[3], int q_pi[3], double *P_0pi, double P_1pi[3], double P_320[3], double P_3210[][2]);
+  void pi4_rot_func(TVector3 V3_pi[4], int q_pi[4], double *P_0pi, double *P_410, double *P_420, double *P_4210, double *P_430,
+                    double *P_4310, double *P_4320, double *P_43210);
 
   void SetQVector(TVector3 qin) {
     V3q.SetX(qin.X());
@@ -71,8 +70,7 @@ struct Subtraction {
   }
 
   void PrintQVector() {
-    std::cout << "Subtraction Class stored q vector: ( " << V3q.X() << " , " << V3q.Y() << " , " << V3q.Z() << " ) "
-              << std::endl;
+    std::cout << "Subtraction Class stored q vector: ( " << V3q.X() << " , " << V3q.Y() << " , " << V3q.Z() << " ) " << std::endl;
   }
 
   Bool_t EFiducialCut(std::string beam_en, TVector3 momentum) { return fiducialcut->EFiducialCut(beam_en, momentum); }

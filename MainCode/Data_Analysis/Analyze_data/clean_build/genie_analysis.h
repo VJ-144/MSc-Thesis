@@ -260,10 +260,10 @@ public:
   TBranch *b_sumKEf;      //!
   TBranch *b_calresp0;    //!
 
-  // Lataling: Added two extra 'int' between the last double and TTree to specify the # of protons and acceptance,
-  // respectively. 0 meaning no detector acceptance and 1 meaning or with detector acceptance (behaves likes a boolean)
-  genie_analysis(std::string, std::string, int, int, int, int, double, double, double, int, int, double, double, double,
-                 double, int, int, TTree *tree = 0);
+  // Lataling: Added two extra 'int' between the last double and TTree to specify the # of protons and acceptance, respectively.
+  // 0 meaning no detector acceptance and 1 meaning or with detector acceptance (behaves likes a boolean)
+  genie_analysis(std::string, std::string, int, int, int, int, double, double, double, int, int, double, double, double, double, int, int,
+                 TTree *tree = 0);
   virtual ~genie_analysis();
   virtual Int_t Cut(Long64_t entry);
   virtual Int_t GetEntry(Long64_t entry);
@@ -279,20 +279,11 @@ public:
   // Protons & Pi pluses are easy, just a min angle
   // Pi minuses are a functional form theta = A + B / P
 
-  Bool_t PFiducialCutExtra(std::string beam_en, TVector3 momentum) {
+  Bool_t PFiducialCutExtra(std::string beam_en, TVector3 momentum) { return fiducialcut->PFiducialCutExtra(beam_en, momentum); }
 
-    return fiducialcut->PFiducialCutExtra(beam_en, momentum);
-  }
+  Bool_t PiplFiducialCutExtra(std::string beam_en, TVector3 momentum) { return fiducialcut->PiplFiducialCutExtra(beam_en, momentum); }
 
-  Bool_t PiplFiducialCutExtra(std::string beam_en, TVector3 momentum) {
-
-    return fiducialcut->PiplFiducialCutExtra(beam_en, momentum);
-  }
-
-  Bool_t PimiFiducialCutExtra(std::string beam_en, TVector3 momentum) {
-
-    return fiducialcut->PimiFiducialCutExtra(beam_en, momentum);
-  }
+  Bool_t PimiFiducialCutExtra(std::string beam_en, TVector3 momentum) { return fiducialcut->PimiFiducialCutExtra(beam_en, momentum); }
 
   Bool_t Phot_fidExtra(TVector3 momentum) { return fiducialcut->Phot_fidExtra(momentum); }
 
@@ -311,53 +302,46 @@ public:
   bool Pi_phot_fid_united(std::string beam_en, TVector3 V3_pi_phot, int q_pi_phot) {
     return fiducialcut->Pi_phot_fid_united(beam_en, V3_pi_phot, q_pi_phot);
   }
-  Bool_t GetEPhiLimits(std::string beam_en, Float_t momentum, Float_t theta, Int_t sector, Float_t *EPhiMin,
-                       Float_t *EPhiMax) {
+  Bool_t GetEPhiLimits(std::string beam_en, Float_t momentum, Float_t theta, Int_t sector, Float_t *EPhiMin, Float_t *EPhiMax) {
     return fiducialcut->GetEPhiLimits(beam_en, momentum, theta, sector, EPhiMin, EPhiMax);
   }
-  void prot3_rot_func(std::string beam_en, TVector3 V3q, TVector3 V3prot[3], TVector3 V3prot_uncorr[3],
-                      TLorentzVector V4el, double Ecal_3pto2p[][2], double pmiss_perp_3pto2p[][2], double P3pto2p[][2],
-                      double N_p1[3], double Ecal_3pto1p[3], double pmiss_perp_3pto1p[3], double *N_p3det);
-  void prot2_rot_func(std::string beam_en, TVector3 V3q, TVector3 V3prot[2], TVector3 V3prot_uncorr[2],
-                      TLorentzVector V4el, double Ecal_2pto1p[2], double pmiss_perp_2pto1p[2], double P2pto1p[2],
-                      double *Nboth);
-  void prot1_pi1_rot_func(std::string beam_en, TVector3 V3q, TVector3 V3prot, TVector3 V3pi, int q_pi, bool radstat,
-                          double *N_pi_p, double *N_nopi_p);
-  void prot1_pi2_rot_func(std::string beam_en, TVector3 V3q, TVector3 V3prot, TVector3 V3pi[2], int q_pi[2],
-                          bool radstat[2], double *P_1p0pi, double P_1p1pi[2]);
-  void prot1_pi3_rot_func(std::string beam_en, TVector3 V3q, TVector3 V3prot, TVector3 V3pi[3], int q_pi[3],
-                          bool radstat[3], double *P_tot);
-  void prot2_pi1_rot_func(std::string beam_en, TVector3 V3q, TVector3 V3_2prot_corr[2], TVector3 V3_2prot_uncorr[2],
-                          TVector3 V3_1pi, int q_pi, bool radstat, TLorentzVector V4_el, double Ecal_2p1pi_to2p0pi[2],
-                          double p_miss_perp_2p1pi_to2p0pi[2], double P_2p1pito2p0pi[2], double P_2p1pito1p1pi[2],
-                          double P_2p1pito1p0pi[2], double *P_tot);
-  void prot2_pi2_rot_func(std::string beam_en, TVector3 V3_q, TVector3 V3_2prot_corr[2], TVector3 V3_2prot_uncorr[2],
-                          TVector3 V3_2pi[2], int q_pi[2], bool radstat[2], TLorentzVector V4_el, double Ecal_2p2pi[2],
-                          double p_miss_perp_2p2pi[2], double P_tot_2p[2]);
-  void prot3_pi1_rot_func(std::string beam_en, TVector3 V3_q, TVector3 V3_3prot_corr[3], TVector3 V3_3prot_uncorr[3],
-                          TVector3 V3_pi, int q_pi, bool radstat, TLorentzVector V4_el, double Ecal_3p1pi[3],
-                          double p_miss_perp_3p1pi[3], double P_tot_3p[3]);
+  void prot3_rot_func(std::string beam_en, TVector3 V3q, TVector3 V3prot[3], TVector3 V3prot_uncorr[3], TLorentzVector V4el,
+                      double Ecal_3pto2p[][2], double pmiss_perp_3pto2p[][2], double P3pto2p[][2], double N_p1[3], double Ecal_3pto1p[3],
+                      double pmiss_perp_3pto1p[3], double *N_p3det);
+  void prot2_rot_func(std::string beam_en, TVector3 V3q, TVector3 V3prot[2], TVector3 V3prot_uncorr[2], TLorentzVector V4el,
+                      double Ecal_2pto1p[2], double pmiss_perp_2pto1p[2], double P2pto1p[2], double *Nboth);
+  void prot1_pi1_rot_func(std::string beam_en, TVector3 V3q, TVector3 V3prot, TVector3 V3pi, int q_pi, bool radstat, double *N_pi_p,
+                          double *N_nopi_p);
+  void prot1_pi2_rot_func(std::string beam_en, TVector3 V3q, TVector3 V3prot, TVector3 V3pi[2], int q_pi[2], bool radstat[2],
+                          double *P_1p0pi, double P_1p1pi[2]);
+  void prot1_pi3_rot_func(std::string beam_en, TVector3 V3q, TVector3 V3prot, TVector3 V3pi[3], int q_pi[3], bool radstat[3],
+                          double *P_tot);
+  void prot2_pi1_rot_func(std::string beam_en, TVector3 V3q, TVector3 V3_2prot_corr[2], TVector3 V3_2prot_uncorr[2], TVector3 V3_1pi,
+                          int q_pi, bool radstat, TLorentzVector V4_el, double Ecal_2p1pi_to2p0pi[2], double p_miss_perp_2p1pi_to2p0pi[2],
+                          double P_2p1pito2p0pi[2], double P_2p1pito1p1pi[2], double P_2p1pito1p0pi[2], double *P_tot);
+  void prot2_pi2_rot_func(std::string beam_en, TVector3 V3_q, TVector3 V3_2prot_corr[2], TVector3 V3_2prot_uncorr[2], TVector3 V3_2pi[2],
+                          int q_pi[2], bool radstat[2], TLorentzVector V4_el, double Ecal_2p2pi[2], double p_miss_perp_2p2pi[2],
+                          double P_tot_2p[2]);
+  void prot3_pi1_rot_func(std::string beam_en, TVector3 V3_q, TVector3 V3_3prot_corr[3], TVector3 V3_3prot_uncorr[3], TVector3 V3_pi,
+                          int q_pi, bool radstat, TLorentzVector V4_el, double Ecal_3p1pi[3], double p_miss_perp_3p1pi[3],
+                          double P_tot_3p[3]);
   void pi1_rot_func(std::string beam_en, TVector3 V3_pi, int q_pi, bool radstat, TVector3 V3_q, double *P_pi);
-  void pi2_rot_func(std::string beam_en, TVector3 V3_pi[2], int q_pi[2], bool radstat[2], TVector3 V3_q, double *P_0pi,
-                    double P_1pi[2]);
-  void pi3_rot_func(std::string beam_en, TVector3 V3_pi[3], int q_pi[3], bool radstat[3], TVector3 V3_q, double *P_0pi,
-                    double P_1pi[3], double P_320[3], double P_3210[][2]);
-  void pi4_rot_func(std::string beam_en, TVector3 V3_pi[4], int q_pi[4], bool radstat[4], TVector3 V3_q, double *P_0pi,
-                    double *P_410, double *P_420, double *P_4210, double *P_430, double *P_4310, double *P_4320,
-                    double *P_43210);
+  void pi2_rot_func(std::string beam_en, TVector3 V3_pi[2], int q_pi[2], bool radstat[2], TVector3 V3_q, double *P_0pi, double P_1pi[2]);
+  void pi3_rot_func(std::string beam_en, TVector3 V3_pi[3], int q_pi[3], bool radstat[3], TVector3 V3_q, double *P_0pi, double P_1pi[3],
+                    double P_320[3], double P_3210[][2]);
+  void pi4_rot_func(std::string beam_en, TVector3 V3_pi[4], int q_pi[4], bool radstat[4], TVector3 V3_q, double *P_0pi, double *P_410,
+                    double *P_420, double *P_4210, double *P_430, double *P_4310, double *P_4320, double *P_43210);
   double acceptance_c(double p, double cost, double phi, int id, TFile *file_acceptance, bool ApplyAccWeights);
 };
 
 #endif
 #ifdef GENIE_ANALYSIS_C
 
-// Lataling: same here as above, and named it a_NumOfProton (which shouldn't clash with any other definitions) and
-// a_detector_acceptance
-genie_analysis::genie_analysis(std::string a_target, std::string a_beam_en, int number_rotations, int choice,
-                               int a_elSectors, int a_deltaPhiEl, double a_thetaEl_lb, double a_thetaEl_ub,
-                               double a_elMom_lb, int a_protSectors, int a_deltaPhiProt, double a_thetaProt_lb,
-                               double a_thetaProt_ub, double a_protMom_lb, double a_protMom_ub, int a_NumOfProton,
-                               int a_detector_acceptance, TTree *tree)
+// Lataling: same here as above, and named it a_NumOfProton (which shouldn't clash with any other definitions) and a_detector_acceptance
+genie_analysis::genie_analysis(std::string a_target, std::string a_beam_en, int number_rotations, int choice, int a_elSectors,
+                               int a_deltaPhiEl, double a_thetaEl_lb, double a_thetaEl_ub, double a_elMom_lb, int a_protSectors,
+                               int a_deltaPhiProt, double a_thetaProt_lb, double a_thetaProt_ub, double a_protMom_lb, double a_protMom_ub,
+                               int a_NumOfProton, int a_detector_acceptance, TTree *tree)
     : fChain(0) {
 
   std::cout << "Target = " << a_target << "\n" << std::endl;
@@ -402,11 +386,10 @@ genie_analysis::genie_analysis(std::string a_target, std::string a_beam_en, int 
     } else if (a_elSectors == 0) {
       t_elSectors->SetTitle("El_sect_Nocut");
     } else {
-      std::cout << "You have entered an invalid value for elSectors (parameter 5). Valid options are 0, 1, or 2. The "
-                   "given value is "
+      std::cout << "You have entered an invalid value for elSectors (parameter 5). Valid options are 0, 1, or 2. The given value is "
                 << a_elSectors << "." << std::endl;
-      std::cout << "If you are adding an option for elSectors (parameter 5), be sure to make the necessary changes in "
-                   "genie_analysis.C, genie_analysis.h, and run_genie_analysis.C."
+      std::cout << "If you are adding an option for elSectors (parameter 5), be sure to make the necessary changes in genie_analysis.C, "
+                   "genie_analysis.h, and run_genie_analysis.C."
                 << std::endl;
     }
 
@@ -422,11 +405,10 @@ genie_analysis::genie_analysis(std::string a_target, std::string a_beam_en, int 
     } else if (a_protSectors == 0) {
       t_protSectors->SetTitle("Prot_Sect_Nocut");
     } else {
-      std::cout << "You have entered an invalid value for protSectors (parameter 10). Valid options are 0 or 1. The "
-                   "given value is "
+      std::cout << "You have entered an invalid value for protSectors (parameter 10). Valid options are 0 or 1. The given value is "
                 << a_protSectors << "." << std::endl;
-      std::cout << "If you are adding an option for protSectors (parameter 10), be sure to make the necessary changes "
-                   "in genie_analysis.C, genie_analysis.h, and run_genie_analysis.C."
+      std::cout << "If you are adding an option for protSectors (parameter 10), be sure to make the necessary changes in genie_analysis.C, "
+                   "genie_analysis.h, and run_genie_analysis.C."
                 << std::endl;
     }
 
@@ -437,8 +419,7 @@ genie_analysis::genie_analysis(std::string a_target, std::string a_beam_en, int 
     } else if (a_deltaPhiEl == 0) {
       t_deltaPhiEl->SetVal(9999);
     } else {
-      std::cout << "You have entered an invalid value for deltaPhiEl (parameter 6). Valid options are 0 or 1. The "
-                   "given value is "
+      std::cout << "You have entered an invalid value for deltaPhiEl (parameter 6). Valid options are 0 or 1. The given value is "
                 << a_deltaPhiEl << "." << std::endl;
     }
 
@@ -449,8 +430,7 @@ genie_analysis::genie_analysis(std::string a_target, std::string a_beam_en, int 
     } else if (a_deltaPhiProt == 0) {
       t_deltaPhiProt->SetVal(9999);
     } else {
-      std::cout << "You have entered an invalid value for deltaPhiProt (parameter 11). Valid options are 0 or 1. The "
-                   "given value is "
+      std::cout << "You have entered an invalid value for deltaPhiProt (parameter 11). Valid options are 0 or 1. The given value is "
                 << a_deltaPhiProt << "." << std::endl;
     }
 
@@ -517,8 +497,8 @@ genie_analysis::genie_analysis(std::string a_target, std::string a_beam_en, int 
 
     if (fchoice == 0) {
 
-      chain->Add(Form("/pnfs/genie/persistent/users/apapadop/JLabSkimmed_1M/Skimmed_1M_e4vWorkshop_%s_%s.root",
-                      ftarget.c_str(), fbeam_en.c_str()));
+      chain->Add(Form("/pnfs/genie/persistent/users/apapadop/JLabSkimmed_1M/Skimmed_1M_e4vWorkshop_%s_%s.root", ftarget.c_str(),
+                      fbeam_en.c_str()));
       // chain->Add(Form("/w/hallb-scifs17exp/clas/claseg2/apapadop/e4v_Workshop/e4vWorkshop_%s_%s.root",ftarget.c_str(),
       // fbeam_en.c_str()));
     }
@@ -528,8 +508,7 @@ genie_analysis::genie_analysis(std::string a_target, std::string a_beam_en, int 
       // chain->Add("/pnfs/genie/scratch/users/nsteinbe/eGENIE_grid/SF_2261_all.root");
 
       // Non radiative SuSav2
-      chain->Add(Form("/pnfs/genie/persistent/users/apapadop/e4v_SuSav2/Exclusive/electrons/%s_%sGeV/"
-                      "apapadop_SuSav2_%s_%sGeV_master.root",
+      chain->Add(Form("/pnfs/genie/persistent/users/apapadop/e4v_SuSav2/Exclusive/electrons/%s_%sGeV/apapadop_SuSav2_%s_%sGeV_master.root",
                       ftarget.c_str(), fbeam_en.c_str(), ftarget.c_str(), fbeam_en.c_str()));
 
       // Ext Radiation SuSav2
@@ -548,8 +527,7 @@ genie_analysis::genie_analysis(std::string a_target, std::string a_beam_en, int 
 
       // Non Radiative G2018
 
-      chain->Add(Form("/pnfs/genie/persistent/users/apapadop/e4v_G2018/Exclusive/electrons/%s_%sGeV/"
-                      "apapadop_G2018_%s_%sGeV_master*.root",
+      chain->Add(Form("/pnfs/genie/persistent/users/apapadop/e4v_G2018/Exclusive/electrons/%s_%sGeV/apapadop_G2018_%s_%sGeV_master*.root",
                       ftarget.c_str(), fbeam_en.c_str(), ftarget.c_str(), fbeam_en.c_str()));
 
       // chain->Add("/genie/app/users/gchamber/Generator/simulations/C12/1_161/G18_10a_02_11a/FSI/genie_gst_C12_1161_el_G18_10a_02_11a_FSI_50k.root");
@@ -568,18 +546,18 @@ genie_analysis::genie_analysis(std::string a_target, std::string a_beam_en, int 
 
       // Ext_Int Radiation SuSav2
 
-      chain->Add(Form("/pnfs/genie/persistent/users/apapadop/e4v_SuSav2/Exclusive/electrons/%s_%sGeV/"
-                      "apapadop_UpdatedSchwingerRad_SuSav2_%s_%sGeV.root",
-                      ftarget.c_str(), fbeam_en.c_str(), ftarget.c_str(), fbeam_en.c_str()));
+      chain->Add(Form(
+          "/pnfs/genie/persistent/users/apapadop/e4v_SuSav2/Exclusive/electrons/%s_%sGeV/apapadop_UpdatedSchwingerRad_SuSav2_%s_%sGeV.root",
+          ftarget.c_str(), fbeam_en.c_str(), ftarget.c_str(), fbeam_en.c_str()));
     }
 
     if (fchoice == 4) {
 
       // Ext+Int Radiation G2018
 
-      chain->Add(Form("/pnfs/genie/persistent/users/apapadop/e4v_G2018/Exclusive/electrons/%s_%sGeV/"
-                      "apapadop_UpdatedSchwingerRad_G2018_%s_%sGeV.root",
-                      ftarget.c_str(), fbeam_en.c_str(), ftarget.c_str(), fbeam_en.c_str()));
+      chain->Add(Form(
+          "/pnfs/genie/persistent/users/apapadop/e4v_G2018/Exclusive/electrons/%s_%sGeV/apapadop_UpdatedSchwingerRad_G2018_%s_%sGeV.root",
+          ftarget.c_str(), fbeam_en.c_str(), ftarget.c_str(), fbeam_en.c_str()));
     }
 
     tree = chain;
