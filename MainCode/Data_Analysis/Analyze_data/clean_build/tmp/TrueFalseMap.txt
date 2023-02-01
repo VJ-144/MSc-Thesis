@@ -1,0 +1,50 @@
+
+min DIS; Truth: yes; Reco: no  = 70832
+
+min DIS; Truth: yes; Reco: yes = 36469
+
+min DIS; Truth: no; Reco: no   = 60733
+
+min DIS; Truth: no; Reco: yes  = 11976
+
+min RES; Truth: yes; Reco: no  = 27392
+
+min RES; Truth: yes; Reco: yes = 15529
+
+min RES; Truth: no; Reco: no   = 3190
+
+min RES; Truth: no; Reco: yes  = 2752
+
+min OTH; Truth: yes; Reco: no  = 33031
+
+min OTH; Truth: yes; Reco: yes = 20320
+
+min OTH; Truth: no; Reco: no   = 22323
+
+min OTH; Truth: no; Reco: yes  = 21416
+
+---------------------------------------------
+
+plus DIS; Truth: yes; Reco: no  = 58809
+
+plus DIS; Truth: yes; Reco: yes = 51384
+
+plus DIS; Truth: no; Reco: no   = 62288
+
+plus DIS; Truth: no; Reco: yes  = 40297
+
+plus RES; Truth: yes; Reco: no  = 21611
+
+plus RES; Truth: yes; Reco: yes = 22096
+
+plus RES; Truth: no; Reco: no   = 3156
+
+plus RES; Truth: no; Reco: yes  = 2814
+
+plus OTH; Truth: yes; Reco: no  = 35323
+
+plus OTH; Truth: yes; Reco: yes = 40219
+
+plus OTH; Truth: no; Reco: no   = 22242
+
+plus OTH; Truth: no; Reco: yes  = 21629

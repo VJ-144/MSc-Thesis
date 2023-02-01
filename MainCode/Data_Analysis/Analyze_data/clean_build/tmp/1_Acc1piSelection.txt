@@ -1,0 +1,30 @@
+
+-----------------------------------------------------------------------------------------------------
+
+# Processed Events = 10000000
+
+1Pi plus Signal # Events = 171044
+
+1Pi zero Signal # Events = 0
+
+1Pi minus Signal # Events = 92598
+
+1232 RES plus Contribution = 23867
+
+DIS plus Contribution = 91681
+
+Other plus Contribution = 55496
+
+1232 RES zero Contribution = 0
+
+DIS zero Contribution = 0
+
+Other zero Contribution = 0
+
+1232 RES minus Contribution = 16705
+
+DIS minus Contribution = 48445
+
+Other minus Contribution = 27448
+
+-----------------------------------------------------------------------------------------------------
