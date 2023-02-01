@@ -1,8 +1,6 @@
 #ifndef SUBTRACTION_CXX
 #define SUBTRACTION_CXX
 
-#include <iostream>
-#include <fstream>
 #include <TH1D.h>
 #include <TFile.h>
 #include <TMath.h>
@@ -11,6 +9,10 @@
 #include <TRandom3.h>
 #include <TF1.h>
 #include <TGraph.h>
+
+#include <iostream>
+#include <fstream>
+
 #include "Subtraction.h"
 
 

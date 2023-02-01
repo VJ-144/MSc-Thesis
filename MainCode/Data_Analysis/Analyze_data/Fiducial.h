@@ -16,6 +16,7 @@
 
 #include "Constants.h"
 
+
 struct Fiducial {
 
   void InitPiMinusFit(std::string beam_en);

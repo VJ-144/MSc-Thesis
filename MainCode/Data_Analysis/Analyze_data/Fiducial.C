@@ -2,18 +2,21 @@
 #define FIDUCIAL_CXX
 
 
-#include <iostream>
-#include <fstream>
-#include <iomanip>
-#include <vector>
 #include <TVectorT.h>
 #include <TVector3.h>
 #include <TF1.h>
 #include <TMath.h>
 #include <TLorentzVector.h>
+
+#include <iostream>
+#include <fstream>
+#include <iomanip>
+#include <vector>
+
 #include "Fiducial.h"
  //maybe if we add all Constants:: back here or in e2a
  //using namespace Constants;
+ 
 
 void Fiducial::InitPiMinusFit(std::string beam_en)
 {

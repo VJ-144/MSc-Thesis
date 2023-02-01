@@ -9,31 +9,31 @@
 #define GENIE_ANALYSIS_C
 
 #include "genie_analysis.h"
+
 #include <TH2.h>
 #include <TStyle.h>
 #include <TCanvas.h>
-
 #include <TProfile.h>
 #include <TH1D.h>
 #include <TMatrixD.h>
 #include <TFile.h>
 #include <TMath.h>
-#include <exception>
-#include <iostream>
-#include <fstream>
 #include <TLorentzVector.h>
 #include <TVectorT.h>
 #include <TRandom3.h>
 #include <TF1.h>
 #include <TH3.h>
 #include <TGraph.h>
-#include <random>
 
 #include <vector>
 #include <iomanip>
 #include <sstream>
 #include <iostream>
 #include <fstream>
+#include <exception>
+#include <iostream>
+#include <fstream>
+#include <random>
 
 using namespace std;
 
