@@ -3,7 +3,7 @@
 #include "genie_analysis.h"
 
 // vchand: adding this as an easy way to input parameters as oppose to using terminal
-#include "RunAnalysis.h"
+#include "InputParameters.h"
 
 #include <iostream>
 
@@ -26,7 +26,7 @@ int main(int argc, char **argv)
   std::cout << std::endl; // separate this output from the rest of the output
 
   // vchand: editing if(argc<15) as the parameters are input in file now 
-  if( false ){
+  if( discription ){
     std::cout << "/-------------------------------------------------------\\" << std::endl;
     std::cout << "| Please specify the target (3He, 56Fe, C12, 4He), the  |" << std::endl;
     std::cout << "| beam energy (1161, 2261 or 4461), the data type       |" << std::endl;

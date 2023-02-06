@@ -5,6 +5,8 @@
 
 using namespace std;
 
+// prints a discription of all parameters to terminal
+bool discription               =            false;
 
 // parameters for analysis
 std::string target_in          =           "C12"; 
@@ -27,15 +29,11 @@ int NumOfProton_in             =            -1;
 
 
 // applies momentum thereshold and overuns previous inputs 
-// bool Applymomthresh = true;
 
-// // currently not implemeted in code - commented out in genie_analysis.C
+// bool Applymomthresh = true;
 // bool TruthLevel1p0piSignalStudy = false;
 // bool TruthLevel0piSignalStudy = false;
 // bool UsePhiThetaBand = false;
-
-// tuple <bool, bool, bool, bool> InputParam(Applymomthresh, TruthLevel1p0piSignalStudy, TruthLevel0piSignalStudy, UsePhiThetaBand)
-
 
 
 #endif
