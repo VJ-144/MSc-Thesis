@@ -27,14 +27,14 @@ int NumOfProton_in             =            -1;
 
 
 // applies momentum thereshold and overuns previous inputs 
-bool Applymomthresh = true;
+// bool Applymomthresh = true;
 
-// currently not implemeted in code - commented out in genie_analysis.C
-bool TruthLevel1p0piSignalStudy = false;
-bool TruthLevel0piSignalStudy = false;
-bool UsePhiThetaBand = false;
+// // currently not implemeted in code - commented out in genie_analysis.C
+// bool TruthLevel1p0piSignalStudy = false;
+// bool TruthLevel0piSignalStudy = false;
+// bool UsePhiThetaBand = false;
 
-tuple <bool, bool, bool, bool> InputParam(Applymomthresh, TruthLevel1p0piSignalStudy, TruthLevel0piSignalStudy, UsePhiThetaBand)
+// tuple <bool, bool, bool, bool> InputParam(Applymomthresh, TruthLevel1p0piSignalStudy, TruthLevel0piSignalStudy, UsePhiThetaBand)
 
 
 
