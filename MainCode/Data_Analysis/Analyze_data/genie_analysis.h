@@ -14,6 +14,9 @@
 #include "Subtraction.h"
 #include "Constants.h"
 
+// vchand: adding for input parameters to be put in easy
+#include "RunAnalysis.h"
+
 
 // Header file for the classes stored in the TTree if any.
 

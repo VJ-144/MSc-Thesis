@@ -34,8 +34,8 @@ bool TruthLevel1p0piSignalStudy = false;
 bool TruthLevel0piSignalStudy = false;
 bool UsePhiThetaBand = false;
 
+tuple <bool, bool, bool, bool> InputParam(Applymomthresh, TruthLevel1p0piSignalStudy, TruthLevel0piSignalStudy, UsePhiThetaBand)
 
 
 
 #endif
-
