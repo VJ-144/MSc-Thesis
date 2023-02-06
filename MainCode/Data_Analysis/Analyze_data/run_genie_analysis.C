@@ -25,7 +25,8 @@ int main(int argc, char **argv)
   std::cout << "\\--------------------------------------------------------/" << std::endl; 
   std::cout << std::endl; // separate this output from the rest of the output
 
-  if( argc < 15 ){
+  // vchand: editing if(argc<15) as the parameters are input in file now 
+  if( false ){
     std::cout << "/-------------------------------------------------------\\" << std::endl;
     std::cout << "| Please specify the target (3He, 56Fe, C12, 4He), the  |" << std::endl;
     std::cout << "| beam energy (1161, 2261 or 4461), the data type       |" << std::endl;
