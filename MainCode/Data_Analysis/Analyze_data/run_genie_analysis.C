@@ -84,21 +84,23 @@ int main(int argc, char **argv)
   // int NumOfProton = atoi(argv[17]);
 
 
-  std::string target  = target_in
-  std::string beam_en = beam_en_in
-  int choice = choice_in
-  int rotations = rotations_in
-  int elSectors_flag = elSectors_flag_in
-  int deltaPhiEl = deltaPhiEl_in
-  int thetaEl_lb = thetaEl_lb_in
-  int thetaEl_ub = thetaEl_ub_in
-  double elMom_lb = elMom_lb_in
-  int protSectors_flag = protSectors_flag_in
-  int deltaPhiProt = deltaPhiProt_in
-  int thetaProt_lb = thetaProt_lb_in
-  int thetaProt_ub = thetaProt_ub_in
-  double protMom_lb = protMom_lb_in
-  double protMom_ub = protMom_ub_in
+  std::string target  = target_in;
+  std::string beam_en = beam_en_in;
+  int choice = choice_in;
+  int rotations = rotations_in;
+  int elSectors_flag = elSectors_flag_in;
+  int deltaPhiEl = deltaPhiEl_in;
+  int thetaEl_lb = thetaEl_lb_in;
+  int thetaEl_ub = thetaEl_ub_in;
+  double elMom_lb = elMom_lb_in;
+  int protSectors_flag = protSectors_flag_in;
+  int deltaPhiProt = deltaPhiProt_in;
+  int thetaProt_lb = thetaProt_lb_in;
+  int thetaProt_ub = thetaProt_ub_in;
+  double protMom_lb = protMom_lb_in;
+  double protMom_ub = protMom_ub_in;
+  int detector_acceptance = detector_acceptance_in;
+  int NumOfProton = NumOfProton_in;
   
 
   if (choice != 2 && choice != 1 && choice != 0) {
