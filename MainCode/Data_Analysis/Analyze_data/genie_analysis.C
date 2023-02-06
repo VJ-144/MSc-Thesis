@@ -9,7 +9,7 @@
 #define GENIE_ANALYSIS_C
 
 // vchand: adding this as an easy way to input parameters as oppose to using terminal
-#include "RunAnalysis.h"
+// #include "RunAnalysis.h"
 
 #include "genie_analysis.h"
 #include <TH2.h>
@@ -99,12 +99,12 @@ void genie_analysis::Loop() {
 
 	// vchand: changed so inputs coming from "RunAnalysis.h"
 	//Lataling: use this to turn the threshold momentum restrictions on or off
-	// bool Applymomthresh = true;
+	bool Applymomthresh = true;
 
-	// bool TruthLevel1p0piSignalStudy = false;
-	// bool TruthLevel0piSignalStudy = false;
+	bool TruthLevel1p0piSignalStudy = false;
+	bool TruthLevel0piSignalStudy = false;
 
-    //     bool UsePhiThetaBand = false;
+	bool UsePhiThetaBand = false;
 
         double PtMax = 0.2; // gchamber: max pt cut (1e1p spectrum)
 
