@@ -6,7 +6,7 @@
 using namespace std;
 
 // prints a discription of all parameters to terminal
-bool discription               =         false;
+bool discription_in            =           false;
 
 // parameters for analysis
 std::string target_in          =           "C12"; 
