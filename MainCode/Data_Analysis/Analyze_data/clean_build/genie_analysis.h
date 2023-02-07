@@ -480,6 +480,7 @@ genie_analysis::genie_analysis(std::string a_target, std::string a_beam_en, int 
     my_options->Add(t_protSectors);
     my_options->Add(t_AnyCuts);
 
+    // I don't see SINGLE_TREE defined anywhere so I think the 'else' is always used
 #ifdef SINGLE_TREE
     // The following code should be used if you want this class to access
     // a single tree instead of a chain
@@ -722,6 +723,7 @@ void genie_analysis::Show(Long64_t entry) {
     return;
   fChain->Show(entry);
 }
+
 Int_t genie_analysis::Cut(Long64_t entry) {
   // This function may be called from Loop.
   // returns  1 if entry is accepted.

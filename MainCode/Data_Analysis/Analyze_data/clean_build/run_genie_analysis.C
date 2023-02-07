@@ -21,6 +21,7 @@ int main(int argc, char **argv) {
   std::cout << "\\--------------------------------------------------------/" << std::endl;
   std::cout << std::endl; // separate this output from the rest of the output
 
+  // TODO: This message doesn't mention the proton number and acceptance parameters and it should
   if (argc < 15) {
     std::cout << "/-------------------------------------------------------\\" << std::endl;
     std::cout << "| Please specify the target (3He, 56Fe, C12, 4He), the  |" << std::endl;
