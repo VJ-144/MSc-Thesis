@@ -24,7 +24,7 @@ def main():
     NumOfProton                     =            -1
 
 
-    if (discription): cmd = f'python ./genie_analysis'
+    if (discription): cmd = 'python ./genie_analysis'
     else:
         cmd = f'python ./genie_analysis {target} {beam_en} {choice} {rotations} {elSectors_flag} {deltaPhiEl} \
             {thetaEl_lb} {thetaEl_ub} {elMom_lb} {protSectors_flag} {deltaPhiProt} {thetaProt_lb} {thetaProt_ub} \
