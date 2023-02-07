@@ -2,15 +2,13 @@
 #define rungenieanalysis
 #include "genie_analysis.h"
 
-// vchand: adding this as an easy way to input parameters as oppose to using terminal
-#include "InputParameters.h"
 
 #include <iostream>
 
 using namespace std;
 
-// vchand: removing arguments form main
-int main()
+// vchand: removing arguments form
+int main(int argc, char **argv)
 {
   std::cout << std::endl; // separate this initial output from the last command typed in the terminal
   std::cout << "/--------------------------------------------------------\\" << std::endl; 
@@ -27,8 +25,7 @@ int main()
   std::cout << std::endl; // separate this output from the rest of the output
 
   // vchand: editing if(argc<15) as the parameters are input in file now
-  // bool discription = discription_in;
-  if( discription ){
+  if( argc<15 ){
     std::cout << "/-------------------------------------------------------\\" << std::endl;
     std::cout << "| Please specify the target (3He, 56Fe, C12, 4He), the  |" << std::endl;
     std::cout << "| beam energy (1161, 2261 or 4461), the data type       |" << std::endl;
@@ -65,45 +62,26 @@ int main()
     exit(1);
   }
 
-  // vchand: inputs coming from "RunAnalysis.h"
-  // std::string target  = argv[1];
-  // std::string beam_en = argv[2];
-  // int choice = atoi(argv[3]);
-  // int rotations = atoi(argv[4]);
-  // int elSectors_flag = atoi(argv[5]);
-  // int deltaPhiEl = atoi(argv[6]);
-  // int thetaEl_lb = stod(argv[7]);
-  // int thetaEl_ub = stod(argv[8]);
-  // double elMom_lb = stod(argv[9]);
-  // int protSectors_flag = atoi(argv[10]);
-  // int deltaPhiProt = atoi(argv[11]);
-  // int thetaProt_lb = stod(argv[12]);
-  // int thetaProt_ub = stod(argv[13]);
-  // double protMom_lb = stod(argv[14]); 
-  // double protMom_ub = stod(argv[15]);
+  // vchand: inputs coming from python script which puts them in terminal
+  std::string target  = argv[1];
+  std::string beam_en = argv[2];
+  int choice = atoi(argv[3]);
+  int rotations = atoi(argv[4]);
+  int elSectors_flag = atoi(argv[5]);
+  int deltaPhiEl = atoi(argv[6]);
+  int thetaEl_lb = stod(argv[7]);
+  int thetaEl_ub = stod(argv[8]);
+  double elMom_lb = stod(argv[9]);
+  int protSectors_flag = atoi(argv[10]);
+  int deltaPhiProt = atoi(argv[11]);
+  int thetaProt_lb = stod(argv[12]);
+  int thetaProt_ub = stod(argv[13]);
+  double protMom_lb = stod(argv[14]); 
+  double protMom_ub = stod(argv[15]);
   
-  // // vchand - added extra parameters which are missing, corresponds to detector acceptance and number of protons
-  // int detector_acceptance = atoi(argv[16]);
-  // int NumOfProton = atoi(argv[17]);
-
-
-  std::string target  = target_in;
-  std::string beam_en = beam_en_in;
-  int choice = choice_in;
-  int rotations = rotations_in;
-  int elSectors_flag = elSectors_flag_in;
-  int deltaPhiEl = deltaPhiEl_in;
-  int thetaEl_lb = thetaEl_lb_in;
-  int thetaEl_ub = thetaEl_ub_in;
-  double elMom_lb = elMom_lb_in;
-  int protSectors_flag = protSectors_flag_in;
-  int deltaPhiProt = deltaPhiProt_in;
-  int thetaProt_lb = thetaProt_lb_in;
-  int thetaProt_ub = thetaProt_ub_in;
-  double protMom_lb = protMom_lb_in;
-  double protMom_ub = protMom_ub_in;
-  int detector_acceptance = detector_acceptance_in;
-  int NumOfProton = NumOfProton_in;
+  // vchand - added extra parameters which are missing, corresponds to detector acceptance and number of protons
+  int detector_acceptance = atoi(argv[16]);
+  int NumOfProton = atoi(argv[17]);
   
 
   if (choice != 2 && choice != 1 && choice != 0) {

@@ -8,9 +8,6 @@
 
 #define GENIE_ANALYSIS_C
 
-// vchand: adding this as an easy way to input parameters as oppose to using terminal
-// #include "RunAnalysis.h"
-
 #include "genie_analysis.h"
 #include <TH2.h>
 #include <TStyle.h>
