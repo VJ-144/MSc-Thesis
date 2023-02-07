@@ -392,8 +392,8 @@ void genie_analysis::Loop() {
 		h1_pion_p_1pi[WhichInt][WhichType] = new TH1F("h1_1pion_p_interaction_"+TString(std::to_string(WhichInt))+"_type_"+TString(std::to_string(WhichType)),"",400,0,4);
 		}
 	}
-
-	/* lataling: so has this
+	// lataling: so has this
+	 
 	TH1F *h1_Electron_AccMapWeights = new TH1F("h1_Electron_AccMapWeights","",200,0.,2.);
 	TH1F *h1_Proton_AccMapWeights = new TH1F("h1_Proton_AccMapWeights","",200,0.,2.);
 	TH1F *h1_PiPlus_AccMapWeights = new TH1F("h1_PiPlus_AccMapWeights","",200,0.,2.);
@@ -599,7 +599,8 @@ void genie_analysis::Loop() {
 		Nu_BreakDown[WhichInt] = new TH1D(Form("Nu_Int_%d",WhichInt),";Energy Transfer [GeV]",400,0,4);
 		Pe_BreakDown[WhichInt] = new TH1D(Form("Pe_Int_%d",WhichInt),";P_{e} [GeV/c]",100,0.,5.);
 	}
-	*/ //lataling: ends here
+	 
+	//lataling: ends here
 
 	// Vector containing kinematic variables using Ecal
 	vector<double> CalKineVars{};
@@ -1069,7 +1070,7 @@ void genie_analysis::Loop() {
 			//Start of proton selection //lataling: here (0.3 GeV)
 			// This will be removed as we don't care about protons for now
 
-			/*
+			
 			if (Applymomthresh ? pdgf[i] == 2212 && pf[i] > 0.3 : pdgf[i] == 2212) {
 
 				double ProtonWeight = 1.;
@@ -1151,10 +1152,11 @@ void genie_analysis::Loop() {
 
 				if (fApplyPhiSliceProt_Sectors && ProtonSector != (ElectronSector + 3)%6) { continue; }
 				if (fApplyProtMomCut && (ProtonMag < t_ProtMom_lb->GetVal() || ProtonMag > t_ProtMom_ub->GetVal())) { continue; }
-				*/
+				
 
-				/* lataling: this chunk also removed
-
+				// lataling: this chunk also removed
+				// vchand: to the best of my knowledge this adds proton counts to histograms
+				/* 
 				if (ProtonPhi_Deg > 0 && ProtonPhi_Deg < 60) { h2_Proton_Theta_Momentum_FirstSector->Fill(ProtonMag,ProtonTheta_Deg,ProtonWeight); }
 				if (ProtonPhi_Deg > 60 && ProtonPhi_Deg < 120) { h2_Proton_Theta_Momentum_SecondSector->Fill(ProtonMag,ProtonTheta_Deg,ProtonWeight); }
 				if (ProtonPhi_Deg > 120 && ProtonPhi_Deg < 180) { h2_Proton_Theta_Momentum_ThirdSector->Fill(ProtonMag,ProtonTheta_Deg,ProtonWeight); }
@@ -1177,7 +1179,7 @@ void genie_analysis::Loop() {
 				//h3_Proton_Mom_Theta_Phi->Fill(ProtonMag,ProtonTheta_Deg,ProtonPhi_Deg,ProtonWeight);
 				*/
 
-			//}
+			}
 
 			// -------------------------------------------------------------------------------------------------------------------
 
