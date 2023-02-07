@@ -9,7 +9,8 @@
 
 using namespace std;
 
-int main(int argc, char **argv)
+// vchand: removing arguments form main
+int main()
 {
   std::cout << std::endl; // separate this initial output from the last command typed in the terminal
   std::cout << "/--------------------------------------------------------\\" << std::endl; 
