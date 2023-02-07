@@ -26,9 +26,12 @@ def main():
 
     if (discription): cmd = 'python ./genie_analysis'
     else:
-        cmd = f'python ./genie_analysis {target} {beam_en} {choice} {rotations} {elSectors_flag} {deltaPhiEl} \
-            {thetaEl_lb} {thetaEl_ub} {elMom_lb} {protSectors_flag} {deltaPhiProt} {thetaProt_lb} {thetaProt_ub} \
-            {protMom_lb} {protMom_ub} {detector_acceptance} {NumOfProton}'
+        # cmd = f'python ./genie_analysis {target} {beam_en} {choice} {rotations} {elSectors_flag} {deltaPhiEl} \
+        #     {thetaEl_lb} {thetaEl_ub} {elMom_lb} {protSectors_flag} {deltaPhiProt} {thetaProt_lb} {thetaProt_ub} \
+        #     {protMom_lb} {protMom_ub} {detector_acceptance} {NumOfProton}'
+        cmd = 'python ./genie_analysis {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {}'.format(target, beam_en, \
+                choice, rotations, elSectors_flag, deltaPhiEl, thetaEl_lb, thetaEl_ub, elMom_lb, protSectors_flag,\
+                deltaPhiProt, thetaProt_lb, thetaProt_ub, protMom_lb, protMom_ub, detector_acceptance, NumOfProton)
     
     os.system(cmd)
 
