@@ -27,8 +27,8 @@ int main()
   std::cout << std::endl; // separate this output from the rest of the output
 
   // vchand: editing if(argc<15) as the parameters are input in file now
-  int discription = discription_in;
-  if( discription == 1){
+  // bool discription = discription_in;
+  if( discription ){
     std::cout << "/-------------------------------------------------------\\" << std::endl;
     std::cout << "| Please specify the target (3He, 56Fe, C12, 4He), the  |" << std::endl;
     std::cout << "| beam energy (1161, 2261 or 4461), the data type       |" << std::endl;
