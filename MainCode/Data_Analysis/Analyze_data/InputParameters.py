@@ -35,6 +35,6 @@ else:
     # cmd = 'python ./genie_analysis {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {}'.format(target, beam_en, \
     #         choice, rotations, elSectors_flag, deltaPhiEl, thetaEl_lb, thetaEl_ub, elMom_lb, protSectors_flag,\
     #         deltaPhiProt, thetaProt_lb, thetaProt_ub, protMom_lb, protMom_ub, detector_acceptance, NumOfProton)
-cmd = " ".join(inputs)
+cmd = " ".join(str(v) for v in inputs)
 subprocess.call(cmd, shell=True) 
 
