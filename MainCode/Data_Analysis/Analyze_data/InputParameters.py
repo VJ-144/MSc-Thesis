@@ -6,7 +6,7 @@ import sys, os, itertools, subprocess
 discription                     =           True
 
 # parameters for analysis
-target                          =           "C12"; 
+target                          =           "C12" 
 beam_en                         =           "2261"
 choice                          =             1
 rotations                       =             1
