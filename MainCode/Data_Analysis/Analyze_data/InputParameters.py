@@ -25,14 +25,16 @@ detector_acceptance             =             1
 NumOfProton                     =            -1
 
 
-if (discription): cmd = ["./genie_analysis", target]
+if (discription):
+     inputs = ("./genie_analysis", target)
 else:
-    cmd = ["./genie_analysis", target, beam_en, choice, rotations, elSectors_flag, deltaPhiEl, \
+    inputs = ("./genie_analysis", target, beam_en, choice, rotations, elSectors_flag, deltaPhiEl, \
         thetaEl_lb, thetaEl_ub, elMom_lb, protSectors_flag, deltaPhiProt, thetaProt_lb, thetaProt_ub, \
-        protMom_lb, protMom_ub, detector_acceptance, NumOfProton]
+        protMom_lb, protMom_ub, detector_acceptance, NumOfProton)
+
     # cmd = 'python ./genie_analysis {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {}'.format(target, beam_en, \
     #         choice, rotations, elSectors_flag, deltaPhiEl, thetaEl_lb, thetaEl_ub, elMom_lb, protSectors_flag,\
     #         deltaPhiProt, thetaProt_lb, thetaProt_ub, protMom_lb, protMom_ub, detector_acceptance, NumOfProton)
-
+cmd = " ".join(inputs)
 subprocess.call(cmd, shell=True) 
 
