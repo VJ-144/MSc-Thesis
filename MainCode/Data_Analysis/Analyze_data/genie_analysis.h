@@ -494,8 +494,8 @@ genie_analysis::genie_analysis( std::string a_target, std::string a_beam_en, int
       TChain * chain = new TChain("gst","genie_analysis");
 
 	if (fchoice == 0) { 
-
-		chain->Add(Form("/pnfs/genie/persistent/users/apapadop/JLabSkimmed_1M/Skimmed_1M_e4vWorkshop_%s_%s.root",ftarget.c_str(), fbeam_en.c_str())); 
+      chain->Add(Form("/pnfs/genie/persistent/users/vchand/CLAS12/C12/truthLevel/e_on_1000060120_598636MeV_Q2_0_5.gst.root"));
+		//chain->Add(Form("/pnfs/genie/persistent/users/apapadop/JLabSkimmed_1M/Skimmed_1M_e4vWorkshop_%s_%s.root",ftarget.c_str(), fbeam_en.c_str())); 
 		//chain->Add(Form("/w/hallb-scifs17exp/clas/claseg2/apapadop/e4v_Workshop/e4vWorkshop_%s_%s.root",ftarget.c_str(), fbeam_en.c_str())); 
 	}
 
