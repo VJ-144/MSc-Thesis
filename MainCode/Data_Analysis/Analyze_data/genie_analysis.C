@@ -746,24 +746,25 @@ void genie_analysis::Loop() {
 
 		if(jentry == 0){ //first entry to initialize TorusCurrent, Fiducials and Subtraction classes
 
+			// vchand: clas12 has torus magnet after detector to minimise effects. commenting this out for clas12 genie simulation
 			//The TorusField has to be set before the Fiducialcut parameters are initialized
-			if(en_beam[fbeam_en]>1. && en_beam[fbeam_en]<2. ) //1.1 GeV, we are not using the 1.1 GeV data with 1500 current field
-			{
-				 fTorusCurrent = 750;
-			}
-			else if( (en_beam[fbeam_en]>2. && en_beam[fbeam_en]<3.) || (en_beam[fbeam_en]>4. && en_beam[fbeam_en]<5.) ) //2.2 GeV	or 4.4 GeV
-			{
-				 fTorusCurrent = 2250;
-			}
-			else { std::cout << "genie_analysis::Loop(): fTorusCurrent could not be assigned" << std::endl;}
+// 			if(en_beam[fbeam_en]>1. && en_beam[fbeam_en]<2. ) //1.1 GeV, we are not using the 1.1 GeV data with 1500 current field
+// 			{
+// 				 fTorusCurrent = 750;
+// 			}
+// 			else if( (en_beam[fbeam_en]>2. && en_beam[fbeam_en]<3.) || (en_beam[fbeam_en]>4. && en_beam[fbeam_en]<5.) ) //2.2 GeV	or 4.4 GeV
+// 			{
+// 				 fTorusCurrent = 2250;
+// 			}
+// 			else { std::cout << "genie_analysis::Loop(): fTorusCurrent could not be assigned" << std::endl;}
 
-			fiducialcut->SetConstants(fTorusCurrent, target_name, en_beam);
-			fiducialcut->SetFiducialCutParameters(fbeam_en);
-			std::cout << " EventLoop: Finished setting up fiducial cut class " << std::endl;
-//			rotation->InitSubtraction(fbeam_en, target_name, bind_en, N_tot, fiducialcut);
-			rotation->InitSubtraction(StoreEnergy, target_name, bind_en, N_tot, fiducialcut);
-			std::cout << " EventLoop: Finished setting up rotation initialize " << std::endl;
-		}
+// 			fiducialcut->SetConstants(fTorusCurrent, target_name, en_beam);
+// 			fiducialcut->SetFiducialCutParameters(fbeam_en);
+// 			std::cout << " EventLoop: Finished setting up fiducial cut class " << std::endl;
+// //			rotation->InitSubtraction(fbeam_en, target_name, bind_en, N_tot, fiducialcut);
+// 			rotation->InitSubtraction(StoreEnergy, target_name, bind_en, N_tot, fiducialcut);
+// 			std::cout << " EventLoop: Finished setting up rotation initialize " << std::endl;
+// 		}
 
 		//Resets q vector to (0,0,0)
 		rotation->ResetQVector();
